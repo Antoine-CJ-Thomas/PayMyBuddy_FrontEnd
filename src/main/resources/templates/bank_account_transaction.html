@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="css/bank_account_transaction.css" />
+        <title>Pay My Buddy - bank account transaction</title>
+
+    </head>
+
+    <body>
+
+    	<div id="bloc_page">
+
+	    	<header>
+
+	    		<div id="menu_banner">
+
+	    			<div id="menu_banner_logo">
+
+	  					<label for="pay_my_buddy">Pay My Buddy</label><br>
+
+		    		</div>
+
+	    			<div id="menu_banner_button">
+
+		   					<a href="home">Home</a>
+		   					<a href="bank">Bank</a>
+		   					<a href="contact">Contact</a>
+		   					<a href="profile">Profile</a>
+		   					<a href="index">Log off</a>
+
+		    		</div>
+
+		    	</div>
+
+	    		<div id="naviguation_banner">
+
+	    			<div id="naviguation_banner_button">
+
+	   					<a href="home">Home /</a>
+	   					<a href="bank">Bank /</a>
+	  					<label for="transfer">Transfer /</label><br>
+
+	    			</div>
+
+	    		</div>
+
+	    	</header>
+
+	    	<section>
+
+	    		<div id="money_sender">
+
+		    		<div id="money_sender_header">
+
+	    				<h1>Send Money</h1>
+						<a href="bank">Add bank account</a>
+
+		    		</div>
+
+		    		<div id="money_sender_body">
+
+						<select name="bank_account" id="bank_account">
+
+							<option value="" disabled selected>Account</option>
+							<option value="contact_1">Account 1</option>
+							<option value="contact_2">Account 2</option>
+							<option value="contact_3">Account 3</option>
+							<option value="contact_4">Account 4</option>
+
+						</select>
+
+						<input type="text" id="description" name="description" placeholder="Description">
+
+						<input type="number" id="amount" name="amount" min="0" max="100" placeholder="  0€">
+
+						<a href="#">Send</a>
+
+		    		</div>
+ 
+	    		</div>
+
+	    		<div id="transaction_table">
+
+		    		<div id="transaction_table_header">
+
+		    			<h1>My bank account transactions</h1>
+
+		    		</div>
+
+		    		<div id="transaction_table_body">
+
+						<table>
+
+							<tr>
+								<th>Account</th>
+								<th>Description</th>
+								<th>Amount</th>
+							</tr>
+
+							<tr>
+								<td>Account 1</td>
+								<td>Restaurant bill share</td>
+								<td>10€</td>
+							</tr>
+
+							<tr>
+								<td>Account 2</td>
+								<td>Trip money</td>
+								<td>25€</td>
+							</tr>
+
+							<tr>
+								<td>Account 3</td>
+								<td>Movie tickets</td>
+								<td>8€</td>
+							</tr>
+
+						</table>
+
+		    		</div>
+
+	    			<div id="transaction_table_footer">
+
+	   					<a href="#"><<</a>
+	   					<a href="#">1</a>
+	   					<a href="#">2</a>
+	   					<a href="#">3</a>
+	   					<a href="#">4</a>
+	   					<a href="#">5</a>
+	   					<a href="#">>></a>
+
+	    			</div>
+
+	    		</div>
+
+	    	</section>
+
+			<footer>
+
+			</footer>
+
+    	</div>
+
+    </body>
+
+</html>

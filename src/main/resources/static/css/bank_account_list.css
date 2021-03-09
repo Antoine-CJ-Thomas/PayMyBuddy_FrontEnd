@@ -1,0 +1,246 @@
+header {
+
+    font-family: Arial;
+}
+
+#menu_banner {
+
+	height : 48px;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+#menu_banner_logo {
+
+	width: 50%;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+#menu_banner_logo label {
+
+	width: 15%;
+	height : 40px;
+
+	background-color: rgb(116,211,106);
+	border-radius: 8px;
+
+	color: white;
+	font-size: 1em;
+    line-height: 40px; 
+    text-align: center; 
+}
+
+#menu_banner_button {
+
+	width: 50%;
+
+	margin-right: 1%;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: center;
+
+	column-gap: 4%;
+}
+
+#menu_banner_button a {
+
+    font-size: 1em;
+ 	font-weight: normal;
+	text-decoration: none;
+	color: black;
+}
+
+
+#naviguation_banner {
+
+	height : 40px;
+
+	margin-top: 8px;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+
+	background-color: rgb(245,245,245);
+  	border-radius: 8px;
+}
+
+#naviguation_banner a {
+
+    font-size: 1em;
+ 	font-weight: normal;
+	text-decoration: none;
+	color: rgb(97,174,243);
+}
+
+
+#naviguation_banner_button {
+
+	width: 100%;
+
+	margin-left: 1%;
+	margin-right: 1%;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+
+	column-gap: 1%;
+}
+
+section {
+
+    font-family: Arial;
+}
+
+#bank_account_adder {
+
+	margin-top: 40px;
+	margin-left: 30%;
+	margin-right: 30%;
+}
+
+#bank_account_adder_header {
+
+	height : 48px;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+#bank_account_adder_header h1 {
+
+    font-size: 1.5em;
+ 	font-weight: normal;
+}
+
+#bank_account_adder_header a {
+
+	width: 25%;
+	height: 40px;
+
+	color: white;
+    font-size: 1em;
+	font-weight: bold;
+    line-height: 40px; 
+	text-align: center;
+	text-decoration: none;
+	background-color: rgb(97,174,243);
+	border-radius: 8px;	
+}
+
+#bank_account_adder_body {
+
+	height : 120px;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+
+	background-color: rgb(245,245,245);
+	border-radius: 8px;
+}
+
+#bank_account_adder_body input {
+
+	width: 20%;
+	height: 40px;
+
+	border-radius: 8px;
+	text-align: center;
+    font-size: 1em;
+}
+
+#bank_account_adder_body a {
+
+	width: 20%;
+	height: 40px;
+
+	color: white;
+    font-size: 1em;
+	font-weight: bold;
+    line-height: 40px; 
+	text-align: center;
+	text-decoration: none;
+	background-color: rgb(116,211,106);
+	border-radius: 8px;
+}
+
+#bank_account_table {
+
+	margin-top: 16px;
+	margin-left: 30%;
+	margin-right: 30%;
+}
+
+#bank_account_table_header {
+
+	height : 48px;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+#bank_account_table_header h1 {
+
+    font-size: 1.5em;
+ 	font-weight: normal;
+}
+
+#bank_account_table_body {
+
+	height : 400px;
+
+	background-color: rgb(245,245,245);
+}
+
+#bank_account_table_body table {
+
+	width : 100%;
+	height : 100%;
+
+	border: 1px solid black;
+   	border-color: rgb(200,200,200);
+  	border-collapse: collapse;
+}
+
+#bank_account_table_body th {
+
+  	color: white;
+    font-size: 1.2em;
+    text-align: center; 
+ 	font-weight: normal;
+ 	background-color: rgb(116,211,106);
+}
+
+#bank_account_table_body tr {
+
+    font-size: 1em;
+    text-align: center; 
+}
+
+#bank_account_table_body tr:nth-child(odd){
+
+  	background-color: white;
+}
+
+footer {
+
+    font-family: Arial;
+}
