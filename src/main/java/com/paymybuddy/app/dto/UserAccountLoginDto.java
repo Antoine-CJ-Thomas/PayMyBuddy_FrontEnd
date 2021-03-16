@@ -2,8 +2,6 @@ package com.paymybuddy.app.dto;
 
 import org.springframework.stereotype.Component;
 
-import com.paymybuddy.app.model.UserAccount;
-
 @Component
 public class UserAccountLoginDto {
 
