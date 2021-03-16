@@ -3,12 +3,12 @@ header {
     font-family: Arial;
 }
 
-#banner_logo {
+#app_logo {
 
 	margin-top: 40px;
 
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 }
@@ -18,64 +18,19 @@ section {
     font-family: Arial;
 }
 
-#form_body {
-
-	height: 300px;
+#section_div {
 
 	margin-top: 40px;
 	margin-left: 40%;
 	margin-right: 40%;
 	
-   	border: 1px solid black;
-   	border-color: rgb(200,200,200);
+   	border: 1px solid rgb(200,200,200);
 	border-radius: 8px;
 }
 
-#form_body_field_identifier {
+#message_div {
 
 	margin-top: 16px;
-	margin-left: 5%;
-	margin-right: 5%;
-
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-}
-
-#form_body_field_identifier input {
-
-	width: 97%;
-	height: 40px;
-
-	margin-top: 8px;
-
-   	border: 1px solid black;
-   	border-color: rgb(204,208,213);
-	background-color: rgb(245,246,247);
-	border-radius: 8px;
-   	text-align: center;
-    font-size: 1em;
-}
-
-#form_body_field_identifier input::placeholder {
-
-   	color: rgb(141,148,181);
-}
-
-#form_body_button {
-
-	margin-top: 8px;
-
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-}
-
-#form_body_button_login {
-
-	margin-top: 8px;
 
 	display: flex;
 	flex-direction: row;
@@ -83,11 +38,55 @@ section {
 	align-items: center;
 }
 
-#form_body_button_login a {
+.message_label {
 
-	width: 90%;
+	width: 100%;
+	height: 20px;
+
+	color: red;
+   	text-align: center;
+    font-size: 1em;
+}
+
+#login_div {
+
+	margin-top: 16px;
+	margin-left: 5%;
+	margin-right: 5%;
+	margin-bottom: 16px;
+}
+
+#login_form {
+	
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	gap: 8px;
+}
+
+.text_input {
+
+	width: 98%;
 	height: 40px;
 
+   	border: 1px solid rgb(204,208,213);
+	background-color: rgb(245,246,247);
+	border-radius: 8px;
+   	text-align: center;
+    font-size: 1em;
+}
+
+.text_input::placeholder {
+
+   	color: rgb(141,148,181);
+}
+
+.login_submit_button {
+
+	width: 100%;
+	height: 40px;
+	
 	color: white;
     font-size: 1em;
     line-height: 40px; 
@@ -96,11 +95,15 @@ section {
 	text-decoration: none;
 	background-color: rgb(97,174,243);
 	border-radius: 8px;
+	border: none;
 }
 
-#form_body_checkbox {
+#checkbox_div {
 
-	margin-top: 16px;
+	width: 100%;
+	height : 32px;
+
+	margin-left: 25%;
 
 	display: flex;
 	flex-direction: row;
@@ -108,46 +111,61 @@ section {
 	align-items: center;
 }
 
-#form_body_separation {
+.checkbox_input {
+	
+	width: 10%;
+}
 
-	width: 90%;
-    height: 1px;
+.checkbox_label {
 
-	margin-top: 16px;
+	width: 65%;
+	height : 20px;
+
+	font-size: 1em;
+    line-height: 20px; 
+    text-align: left; 
+}
+
+#separation_div {
+
+	margin-top: 8px;
 	margin-left: 5%;
 	margin-right: 5%;
 
-    border-top: 1px solid black;
-   	border-color: rgb(200,200,200);
+    border-top: 1px solid rgb(200,200,200);
 }
 
-#form_body_button_register {
+#registration_div {
 
 	margin-top: 16px;
+	margin-bottom: 16px;
+}
 
+#register_form {
+	
 	display: flex;
-	flex-direction: row;
-	justify-content: center;
+	flex-direction: column;
+	justify-content: space-between;
 	align-items: center;
 }
 
-#form_body_button_register a {
+.register_submit_button {
 
 	width: 50%;
 	height: 40px;
-
+	
 	color: white;
     font-size: 1em;
-	font-weight: bold;
     line-height: 40px; 
+	font-weight: bold;
     text-align: center; 
 	text-decoration: none;
 	background-color: rgb(116,211,106);
 	border-radius: 8px;
+	border: none;
 }
 
 footer {
 
     font-family: Arial;
-
 }

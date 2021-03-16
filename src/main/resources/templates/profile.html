@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
 
     <head>
@@ -11,120 +12,136 @@
 
     <body>
 
-    	<div id="bloc_page">
+    	<header>
 
-	    	<header>
+    		<div id="header_div">
 
-	    		<div id="menu_banner">
+    			<div id="logo_div">
 
-	    			<div id="menu_banner_logo">
-
-	  					<label for="pay_my_buddy">Pay My Buddy</label><br>
-
-		    		</div>
-
-	    			<div id="menu_banner_button">
-
-		   					<a href="home">Home</a>
-		   					<a href="bank">Bank</a>
-		   					<a href="contact">Contact</a>
-		   					<a href="profile">Profile</a>
-		   					<a href="index">Log off</a>
-
-		    		</div>
-
-		    	</div>
-
-	    		<div id="naviguation_banner">
-
-	    			<div id="naviguation_banner_button">
-
-	   					<a href="home">Home /</a>
-	  					<label for="profile">Profile /</label><br>
-
-	    			</div>
+  					<label for="pay_my_buddy">Pay My Buddy</label>
 
 	    		</div>
 
-	    	</header>
+    			<div id="button_div">
 
-	    	<section>
-
-	    		<div id="actual_information">
-
-		    		<div id="actual_information_header">
-
-	    				<h1>My informations</h1>
-
-		    		</div>
-
-		    		<div id="actual_information_body">
-
-		    			<table>
-
-							<tr>
-								<td><label for="my_email">Email address :</label></td>
-								<td><label for="my_email">Hayley.A@email</label></td>
-							</tr>
-
-							<tr>
-								<td><label for="my_first_name">First name :</label></td>
-								<td><label for="my_first_name">Hayley</label></td>
-							</tr>
-
-							<tr>
-								<td><label for="my_last_name">Last name :</label></td>
-								<td><label for="my_last_name">A</label></td>
-							</tr>
-
-						</table>
-
-		    		</div>
+	   					<a class="menu_button" href="home">Home</a>
+	   					<a class="menu_button" href="bank">Bank</a>
+	   					<a class="menu_button" href="contact">Contact</a>
+	   					<a class="menu_button" href="profile">Profile</a>
+	   					<a class="menu_button" href="login">Log off</a>
 
 	    		</div>
 
-	    		<div id="editable_information">
+	    	</div>
 
-		    		<div id="editable_information_header">
+    		<div id="naviguation_div">
 
-	    				<h1>Edit informations</h1>
+    			<div id="path_div">
 
+   					<a class="path_button" href="home">Home /</a>
+  					<label for="profile">Profile /</label>
+
+    			</div>
+
+    		</div>
+
+    	</header>
+
+    	<section>
+
+    		<div id="section_div">
+
+	    		<div id="information_div">
+	
+		    		<div id="information_title_div">
+	
+	    				<h1 class="information_title"> My informations</h1>
+	
 		    		</div>
+	
+		    		<div id="information_background_div">
+	
+	    				<div id="information_table_div">
 
-		    		<div id="editable_information_body">
+	    					<div class="information_field_div">
+	    					
+					    		<label class="information_label" for="email_address">Email address :</label>
+								<label class="information_label" th:text="${email_address}"></label>
+	
+			    			</div>
 
-		    			<table>
+	    					<div class="information_field_div">
+	    					
+		    					<label class="information_label" for="first_name">First name :</label>
+		    					<label class="information_label" th:text="${first_name}"></label>
+	
+			    			</div>
 
-							<tr>
-								<td><label for="my_first_name">First name :</label></td>
-								<td><input type="text" name="my_first_name"/></td>
-							</tr>
-
-							<tr>
-								<td><label for="my_last_name">Last name :</label></td>
-								<td><input type="text" name="my_last_name"/></td>
-							</tr>
-
-							<tr>
-								<td><label for="my_password">Password :</label></td>
-								<td><input type="text" name="my_password"/></td>
-							</tr>
-
-						</table>
-
-	   					<a href="index">Save</a>
-
+	    					<div class="information_field_div">
+	    					
+		    					<label class="information_label" for="last_name">Last name :</label>
+		    					<label class="information_label" th:text="${last_name}"></label>
+	
+			    			</div>
+		
+			    		</div>
+	
 		    		</div>
-
+	
 	    		</div>
+	
+	    		<div id="edition_div">
+	
+		    		<div id="edition_title_div">
+	
+	    				<h1 class="edition_title">Edit informations</h1>
+	
+		    		</div>
+	
+		    		<div id="edition_background_div">
 
-	    	</section>
+			    		<form id="profile_form" method="post" th:action="@{/profile}">
 
-			<footer>
+	    					<div class="edition_field_div">
+				    		
+					    		<label class="edition_label" for="first_name">First name :</label>
+					    		<input class="edition_input" type="text" name="first_name" th:value="${first_name}"/>
+	
+			    			</div>
 
-			</footer>
+	    					<div class="edition_field_div">
+					    		
+					    		<label class="edition_label" for="last_name">Last name :</label>
+					    		<input class="edition_input" type="text" name="last_name" th:value="${last_name}"/>
+	
+			    			</div>
 
-    	</div>
+	    					<div class="edition_field_div">
+					    		
+					    		<label class="edition_label" for="password">Password :</label>
+					    		<input class="edition_input" type="text" name="password"/>
+	
+			    			</div>
+								
+				    		<div id="edition_button_div">
+
+			   					<button type="submit" class="save_button" >Save</button>
+			
+				    		</div>
+										
+						</form>
+	
+		    		</div>
+		
+	    		</div>
+	
+    		</div>
+
+    	</section>
+
+		<footer>
+
+		</footer>
 
     </body>
 

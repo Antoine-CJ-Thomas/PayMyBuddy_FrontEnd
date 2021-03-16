@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+
 <html>
 
     <head>
 
         <meta charset="utf-8" />
         <link rel="stylesheet" href="css/index.css" />
-        <title>Pay My Buddy - Home</title>
+        <title>Pay My Buddy - index</title>
 
     </head>
 
@@ -13,7 +14,7 @@
 
     	<header>
 
-	    		<div id="banner_logo">
+	    		<div id="app_logo">
 
   					<img src="images/logo.bmp" alt="Pay My Buddy logo">
 
@@ -23,35 +24,45 @@
 
     	<section>
 
-			<div id="form_body">
+			<div id="section_div">
+				
+				<div id="message_div" th:if="${message_label != null}">
+				
+  					<label class="message_label" th:text="${message_label}"></label>
+				
+				</div>
+			
+				<div id="login_div">
 
-	    		<div id="form_body_field_identifier">
-
-  					<input type="text" id="email" name="email" placeholder="Email">
-  					<input type="text" id="password" name="password" placeholder="Password">
+		    		<form id="login_form" method="post" th:action="@{/login}">
+		    		
+	  					<input type="text" class="text_input" name="email_address" placeholder="Email">
+	  					<input type="password" class="text_input" name="password" placeholder="Password">
+	  					
+	    				<button type="submit" class="login_submit_button">Login</button>
+	
+			    		<div id="checkbox_div">
+			    		
+		  					<input type="checkbox" class="checkbox_input" name="remember" checked>
+		  					<label class="checkbox_label" for="Remember_me">Remember me</label>
+		  					
+				    	</div>
+						
+					</form>
 
 	    		</div>
 
-	    		<div id="form_body_button_login">
-
-   					<a href="home">Login</a>
+	    		<div id="separation_div">
 
 	    		</div>
 
-	    		<div id="form_body_checkbox">
+	    		<div id="registration_div">
 
-  					<input type="checkbox" id="Remember me" name="Remember me" checked><br>
-  					<label for="Remember me">Remember me</label><br>
-
-	    		</div>
-
-	    		<div id="form_body_separation">
-
-	    		</div>
-
-	    		<div id="form_body_button_register">
-
-   					<a href="registration">Register</a>
+		    		<form id="register_form" method="get" th:action="@{/registration}">
+	  					
+	    				<button type="submit" class="register_submit_button">Register</button>
+						
+					</form>
 
 	    		</div>
 

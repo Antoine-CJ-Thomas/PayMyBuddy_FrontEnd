@@ -1,61 +1,64 @@
 <!DOCTYPE html>
+
 <html>
 
     <head>
 
         <meta charset="utf-8" />
         <link rel="stylesheet" href="css/registration.css" />
-        <title>Pay My Buddy - Register</title>
+        <title>Pay My Buddy - index</title>
 
     </head>
 
     <body>
 
-    	<div id="bloc_page">
+    	<header>
 
-	    	<header>
+	    		<div id="app_logo">
 
-		    		<div id="banner_logo">
+  					<img src="images/logo.bmp" alt="Pay My Buddy logo">
 
-	  					<img src="images/logo.bmp" alt="Pay My Buddy logo">
+	    		</div>
 
-		    		</div>
+    	</header>
 
-	    	</header>
+    	<section>
 
-	    	<section>
+			<div id="section_div">
+				
+				<div id="message_div" th:if="${message_label != null}">
+				
+  					<label class="message_label" th:text="${message_label}"></label>
+				
+				</div>
+			
+				<div id="register_div">
 
-    			<div id="form_body">
+		    		<form id="register_form" method="post" th:action="@{/registration}">
 
-		    		<div id="form_body_field_name">
+			    		<div id="name_div">
+								
+							<input type="text" id="first_name_input" class="text_input" name="first_name" placeholder="First name">
+							<input type="text" id="last_name_input" class="text_input" name="last_name" placeholder="Last name">
 
-	  					<input type="text" id="first_name" name="first_name" placeholder="First name">
-	  					<input type="text" id="last_name" name="last_name" placeholder="Last name">
+			    		</div>
+		    		
+	  					<input type="text" id="email_address_input" class="text_input" name="email_address" placeholder="Email">
+	  					<input type="password" id="password_input" class="text_input" name="password" placeholder="Password">
+	  					
+	    				<button type="submit" class="register_submit_button">Register</button>
+						
+					</form>
 
-		    		</div>
+	    		</div>
 
-		    		<div id="form_body_field_identifier">
+	    	</div>
 
-	  					<input type="text" id="email" name="email" placeholder="Email">
-	  					<input type="text" id="password" name="password" placeholder="Password">
+    	</section>
 
-		    		</div>
+		<footer>
 
-		    		<div id="form_body_button">
-
-	   					<a href="index">Register</a>
-
-		    		</div>
-
-		    	</div>
-
-	    	</section>
-
-			<footer>
-
-			</footer>
-
-    	</div>
+		</footer>
 
     </body>
 
