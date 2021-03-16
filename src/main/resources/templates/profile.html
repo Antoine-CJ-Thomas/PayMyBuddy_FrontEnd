@@ -61,7 +61,7 @@
 	
 		    		<div id="information_background_div">
 	
-	    				<div id="information_table_div">
+	    				<div id="information_group_div">
 
 	    					<div class="information_field_div">
 	    					
@@ -94,13 +94,19 @@
 	
 		    		<div id="edition_title_div">
 	
-	    				<h1 class="edition_title">Edit informations</h1>
+	    				<h1 class="edition_title">Edit account</h1>
 	
 		    		</div>
 	
 		    		<div id="edition_background_div">
 
-			    		<form id="profile_form" method="post" th:action="@{/profile}">
+			    		<form id="edition_form" method="post" th:action="@{/profile}">
+				
+							<div id="message_div" th:if="${edition_message != null}">
+							
+			  					<label class="message_label" th:text="${edition_message}"></label>
+							
+							</div>
 
 	    					<div class="edition_field_div">
 				    		
@@ -126,6 +132,43 @@
 				    		<div id="edition_button_div">
 
 			   					<button type="submit" class="save_button" >Save</button>
+			
+				    		</div>
+										
+						</form>
+	
+		    		</div>
+		
+	    		</div>
+	
+	    		<div id="deletion_div">
+	
+		    		<div id="deletion_title_div">
+	
+	    				<h1 class="deletion_title">Delete account</h1>
+	
+		    		</div>
+	
+		    		<div id="deletion_background_div">
+
+			    		<form id="deletion_form" method="post" th:action="@{/delete}">
+				
+							<div id="message_div" th:if="${deletion_message != null}">
+							
+			  					<label class="message_label" th:text="${deletion_message}"></label>
+							
+							</div>
+
+	    					<div class="deletion_field_div">
+					    		
+					    		<label class="deletion_label" for="password">Password :</label>
+					    		<input class="deletion_input" type="text" name="password"/>
+	
+			    			</div>
+								
+				    		<div id="deletion_button_div">
+
+			   					<button type="submit" class="delete_button" >Delete</button>
 			
 				    		</div>
 										

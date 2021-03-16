@@ -14,7 +14,7 @@
 
     	<header>
 
-	    		<div id="app_logo">
+	    		<div id="image_div">
 
   					<img src="images/logo.bmp" alt="Pay My Buddy logo">
 
@@ -26,9 +26,9 @@
 
 			<div id="section_div">
 				
-				<div id="message_div" th:if="${message_label != null}">
+				<div id="message_div" th:if="${login_message != null}">
 				
-  					<label class="message_label" th:text="${message_label}"></label>
+  					<label class="message_label" th:text="${login_message}"></label>
 				
 				</div>
 			
