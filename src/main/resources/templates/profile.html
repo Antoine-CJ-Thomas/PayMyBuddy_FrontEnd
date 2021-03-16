@@ -5,7 +5,7 @@
     <head>
 
         <meta charset="utf-8" />
-        <link rel="stylesheet" href="css/profile.css" />
+        <link rel="stylesheet" href="/css/profile.css" />
         <title>Pay My Buddy - profile</title>
 
     </head>
@@ -100,7 +100,7 @@
 	
 		    		<div id="edition_background_div">
 
-			    		<form id="edition_form" method="post" th:action="@{/profile}">
+			    		<form id="edition_form" method="post" th:action="@{/account/edit}">
 				
 							<div id="message_div" th:if="${edition_message != null}">
 							
@@ -151,7 +151,7 @@
 	
 		    		<div id="deletion_background_div">
 
-			    		<form id="deletion_form" method="post" th:action="@{/delete}">
+			    		<form id="deletion_form" method="post" th:action="@{/account/delete}">
 				
 							<div id="message_div" th:if="${deletion_message != null}">
 							

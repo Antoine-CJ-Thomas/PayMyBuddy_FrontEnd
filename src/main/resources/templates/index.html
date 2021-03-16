@@ -5,7 +5,7 @@
     <head>
 
         <meta charset="utf-8" />
-        <link rel="stylesheet" href="css/index.css" />
+        <link rel="stylesheet" href="/css/index.css" />
         <title>Pay My Buddy - index</title>
 
     </head>
@@ -16,7 +16,7 @@
 
 	    		<div id="image_div">
 
-  					<img src="images/logo.bmp" alt="Pay My Buddy logo">
+  					<img src="images/logo.png" alt="Pay My Buddy logo">
 
 	    		</div>
 
@@ -34,7 +34,7 @@
 			
 				<div id="login_div">
 
-		    		<form id="login_form" method="post" th:action="@{/login}">
+		    		<form id="login_form" method="post" th:action="@{/account/login}">
 		    		
 	  					<input type="text" class="text_input" name="email_address" placeholder="Email">
 	  					<input type="password" class="text_input" name="password" placeholder="Password">
