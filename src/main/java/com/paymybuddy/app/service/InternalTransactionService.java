@@ -31,6 +31,6 @@ public class InternalTransactionService {
 	
 	public InternalTransactionRetrievingDto retrieveInternalTransactionList(InternalTransactionRetrievingDto internalTransactionRetrievingDto) {
         logger.info("retrieveInternalTransactionList(" + internalTransactionRetrievingDto + ")"); 
-		return internalTransactionProxy.retrieveInternalTransactionList(internalTransactionRetrievingDto);
+		return internalTransactionProxy.retrieveInternalTransactionList(internalTransactionRetrievingDto.getEmailAddress());
 	}
 }

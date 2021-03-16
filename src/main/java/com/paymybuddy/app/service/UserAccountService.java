@@ -49,6 +49,6 @@ public class UserAccountService {
 
 	public UserAccountRetrievingDto retrieveUserAccount(UserAccountRetrievingDto userAccountRetrievingDto) {
         logger.info("retrieveUserAccount(" + userAccountRetrievingDto + ")"); 
-		return userAccountProxy.retrieveUserAccount(userAccountRetrievingDto);
+		return userAccountProxy.retrieveUserAccount(userAccountRetrievingDto.getEmailAddress());
 	}
 }

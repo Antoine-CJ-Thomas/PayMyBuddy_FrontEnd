@@ -26,7 +26,7 @@ public interface UserAccountProxy {
 	public UserAccountEditingDto editUserAccount(@RequestBody UserAccountEditingDto userAccountEditingDto);
 
 	@GetMapping(value = "/account")
-	public UserAccountRetrievingDto retrieveUserAccount(@RequestParam UserAccountRetrievingDto userAccountRetrievingDto);
+	public UserAccountRetrievingDto retrieveUserAccount(@RequestParam String emailAddress);
 
 	@PostMapping(value = "/login")
 	public UserAccountLoginDto loginUserAccount(@RequestBody UserAccountLoginDto userAccountLoginDto);

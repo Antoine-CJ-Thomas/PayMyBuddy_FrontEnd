@@ -15,5 +15,5 @@ public interface InternalTransactionProxy {
 	public InternalTransactionExecutingDto executeInternalTransaction(@RequestBody InternalTransactionExecutingDto internalTransactionExecutingDto);
 
 	@GetMapping(value = "/internal")
-	public InternalTransactionRetrievingDto retrieveInternalTransactionList(@RequestParam InternalTransactionRetrievingDto internalTransactionRetrievingDto);
+	public InternalTransactionRetrievingDto retrieveInternalTransactionList(@RequestParam String emailAddress);
 }

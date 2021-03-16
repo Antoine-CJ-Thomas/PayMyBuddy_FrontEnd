@@ -20,5 +20,5 @@ public interface BankAccountProxy {
 	public BankAccountRemovingDto removeBankAccount(@RequestBody BankAccountRemovingDto bankAccountDeletingDto);
 
 	@GetMapping(value = "/account")
-	public BankAccountRetrievingDto retrieveBankAccountList(@RequestParam BankAccountRetrievingDto bankAccountRetrievingDto);
+	public BankAccountRetrievingDto retrieveBankAccountList(@RequestParam String emailAddress);
 }

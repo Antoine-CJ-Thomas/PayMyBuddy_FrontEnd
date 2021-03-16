@@ -15,5 +15,5 @@ public interface ExternalTransactionProxy {
 	public ExternalTransactionExecutingDto executeExternalTransaction(@RequestBody ExternalTransactionExecutingDto externalTransactionCreatingDto);
 
 	@GetMapping(value = "/external")
-	public ExternalTransactionRetrievingDto retrieveExternalTransactionList(@RequestParam ExternalTransactionRetrievingDto externalTransactionRetrievingDto);
+	public ExternalTransactionRetrievingDto retrieveExternalTransactionList(@RequestParam String emailAddress);
 }

@@ -31,6 +31,6 @@ public class ExternalTransactionService {
 	
 	public ExternalTransactionRetrievingDto retrieveExternalTransactionList(ExternalTransactionRetrievingDto externalTransactionRetrievingDto) {
         logger.info("retrieveExternalTransactionList(" + externalTransactionRetrievingDto + ")"); 
-		return externalTransactionProxy.retrieveExternalTransactionList(externalTransactionRetrievingDto);
+		return externalTransactionProxy.retrieveExternalTransactionList(externalTransactionRetrievingDto.getEmailAddress());
 	}
 }

@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.paymybuddy.app.dto.BankAccountAddingDto;
 import com.paymybuddy.app.dto.BankAccountRemovingDto;
@@ -27,11 +28,11 @@ public class BankAccountController {
         logger.info("BankAccountController()");
 	}
 	
-    @GetMapping("/bank_account/list")
+    @GetMapping("/bank")
     public String retrieveBankAccountList(Model model) {
         logger.info("retrieveBankAccountList()");
     	
-        BankAccountRetrievingDto BankAccountRetrievingDto = bankAccountService.retrieveBankAccountList(new BankAccountRetrievingDto("test"));
+        BankAccountRetrievingDto BankAccountRetrievingDto = bankAccountService.retrieveBankAccountList(new BankAccountRetrievingDto("antoine.thomas@email"));
 
         model.addAttribute("bank_account_list", BankAccountRetrievingDto.getBankAccountList());
         
@@ -39,50 +40,36 @@ public class BankAccountController {
     }
 	
     @PostMapping("/bank_account/add")
-    public String addBankAccount(Model model, 
+    public ModelAndView addBankAccount(Model model, 
     		@RequestParam(value = "account_number") String accountNumber,
     		@RequestParam(value = "swift_code") String swiftCode) {
     	
         logger.info("addBankAccount()");        
         	
-        BankAccountAddingDto BankAccountAddingDto = bankAccountService.addBankAccount(new BankAccountAddingDto("test", accountNumber, swiftCode));
-        BankAccountRetrievingDto BankAccountRetrievingDto = bankAccountService.retrieveBankAccountList(new BankAccountRetrievingDto("test"));
+        BankAccountAddingDto BankAccountAddingDto = bankAccountService.addBankAccount(new BankAccountAddingDto("antoine.thomas@email", accountNumber, swiftCode));
         
-		if (BankAccountAddingDto.isDataValidated()) {
+		if (BankAccountAddingDto.isDataValidated() == false) {
 
-	        model.addAttribute("bank_account_list", BankAccountRetrievingDto.getBankAccountList());
-		}
-		
-		else {
-
-	        model.addAttribute("bank_account_list", BankAccountRetrievingDto.getBankAccountList());
 		    model.addAttribute("adding_message", BankAccountAddingDto.getMessage());
 		}
 
-        return "bank_account_list.html";
+		return new ModelAndView("redirect:/bank");
     }
 	
-    @PostMapping("/bank_account/delete")/////////////////////////////////POST NOT DELETE
-    public String removeBankAccount(Model model,
+    @PostMapping("/bank_account/delete")
+    public ModelAndView removeBankAccount(Model model,
     		@RequestParam(value = "account_number") String accountNumber,
     		@RequestParam(value = "swift_code") String swiftCode) {
     	
         logger.info("removeBankAccount()");
    	
-        BankAccountRemovingDto BankAccountRemovingDto = bankAccountService.removeBankAccount(new BankAccountRemovingDto("test", accountNumber, swiftCode));
-        BankAccountRetrievingDto BankAccountRetrievingDto = bankAccountService.retrieveBankAccountList(new BankAccountRetrievingDto("test"));
+        BankAccountRemovingDto BankAccountRemovingDto = bankAccountService.removeBankAccount(new BankAccountRemovingDto("antoine.thomas@email", accountNumber, swiftCode));
         
-		if (BankAccountRemovingDto.isDataValidated()) {
+		if (BankAccountRemovingDto.isDataValidated() == false) {
 
-	        model.addAttribute("bank_account_list", BankAccountRetrievingDto.getBankAccountList());
-		}
-		
-		else {
-
-	        model.addAttribute("contact_list", BankAccountRetrievingDto.getBankAccountList());
 		    model.addAttribute("removing_message", BankAccountRemovingDto.getMessage());
 		}
 
-        return "bank_account_list.html";
+		return new ModelAndView("redirect:/bank");
     }
 }

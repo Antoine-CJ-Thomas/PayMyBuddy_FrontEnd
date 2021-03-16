@@ -20,5 +20,5 @@ public interface UserContactProxy {
 	public UserContactRemovingDto removeUserContact(@RequestBody UserContactRemovingDto userContactDeletingDto);
 
 	@GetMapping(value = "/contact")
-	public UserContactRetrievingDto retrieveUserContactList(@RequestParam UserContactRetrievingDto userContactRetrievingDto);
+	public UserContactRetrievingDto retrieveUserContactList(@RequestParam String emailAddress);
 }

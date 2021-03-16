@@ -37,6 +37,6 @@ public class UserContactService {
 	
 	public UserContactRetrievingDto retrieveUserContactList(UserContactRetrievingDto userContactRetrievingDto) {
         logger.info("retrieveUserContactList(" + userContactRetrievingDto + ")"); 
-		return userContactProxy.retrieveUserContactList(userContactRetrievingDto);
+		return userContactProxy.retrieveUserContactList(userContactRetrievingDto.getEmailAddress());
 	}
 }

@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.paymybuddy.app.dto.UserContactAddingDto;
 import com.paymybuddy.app.dto.UserContactRemovingDto;
@@ -27,60 +28,46 @@ public class UserContactController {
         logger.info("UserContactController()");
 	}
 	
-    @GetMapping("/contact/list")
+    @GetMapping("/contact")
     public String retrieveUserContactList(Model model) {
         logger.info("retrieveUserContactList()");
     	
-        UserContactRetrievingDto userContactRetrievingDto = userContactService.retrieveUserContactList(new UserContactRetrievingDto("test"));
+        UserContactRetrievingDto userContactRetrievingDto = userContactService.retrieveUserContactList(new UserContactRetrievingDto("antoine.thomas@email"));
 
         model.addAttribute("contact_list", userContactRetrievingDto.getUserContactList());
         
-        return "contact_list.html";
+        return "/contact_list.html";
     }
 	
     @PostMapping("/contact/add")
-    public String addUserContact(Model model, 
+    public ModelAndView addUserContact(Model model, 
     		@RequestParam(value = "email_address") String emailAddress) {
     	
         logger.info("addUserContact()");        
         	
-        UserContactAddingDto userContactAddingDto = userContactService.addUserContact(new UserContactAddingDto("test", emailAddress));
-        UserContactRetrievingDto userContactRetrievingDto = userContactService.retrieveUserContactList(new UserContactRetrievingDto("test"));
+        UserContactAddingDto userContactAddingDto = userContactService.addUserContact(new UserContactAddingDto("antoine.thomas@email", emailAddress));
         
-		if (userContactAddingDto.isDataValidated()) {
+		if (userContactAddingDto.isDataValidated() == false) {
 
-	        model.addAttribute("contact_list", userContactRetrievingDto.getUserContactList());
-		}
-		
-		else {
-
-	        model.addAttribute("contact_list", userContactRetrievingDto.getUserContactList());
 		    model.addAttribute("adding_message", userContactAddingDto.getMessage());
 		}
 
-        return "contact_list.html";
+		return new ModelAndView("redirect:/contact_list");
     }
 	
     @PostMapping("/contact/delete")/////////////////////////////////POST NOT DELETE
-    public String removeUserContact(Model model,
+    public ModelAndView removeUserContact(Model model,
     		@RequestParam(value = "email_address") String emailAddress) {
     	
         logger.info("removeUserContact()");        
    	
-        UserContactRemovingDto userContactRemovingDto = userContactService.removeUserContact(new UserContactRemovingDto("test", emailAddress));
-        UserContactRetrievingDto userContactRetrievingDto = userContactService.retrieveUserContactList(new UserContactRetrievingDto("test"));
+        UserContactRemovingDto userContactRemovingDto = userContactService.removeUserContact(new UserContactRemovingDto("antoine.thomas@email", emailAddress));
         
-		if (userContactRemovingDto.isDataValidated()) {
+		if (userContactRemovingDto.isDataValidated() == false) {
 
-	        model.addAttribute("contact_list", userContactRetrievingDto.getUserContactList());
-		}
-		
-		else {
-
-	        model.addAttribute("contact_list", userContactRetrievingDto.getUserContactList());
 		    model.addAttribute("removing_message", userContactRemovingDto.getMessage());
 		}
 
-        return "contact_list.html";
+		return new ModelAndView("redirect:/contact_list");
     }
 }

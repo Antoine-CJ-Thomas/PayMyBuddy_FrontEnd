@@ -37,6 +37,6 @@ public class BankAccountService {
 	
 	public BankAccountRetrievingDto retrieveBankAccountList(BankAccountRetrievingDto bankAccountRetrievingDto) {
         logger.info("retrieveBankAccountList(" + bankAccountRetrievingDto + ")"); 
-		return bankAccountProxy.retrieveBankAccountList(bankAccountRetrievingDto);
+		return bankAccountProxy.retrieveBankAccountList(bankAccountRetrievingDto.getEmailAddress());
 	}
 }
