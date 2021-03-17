@@ -5,7 +5,7 @@
     <head>
 
         <meta charset="utf-8" />
-        <link rel="stylesheet" href="/css/index.css" />
+        <link rel="stylesheet" href="/css/login.css" />
         <title>Pay My Buddy - index</title>
 
     </head>
@@ -25,14 +25,14 @@
     	<section>
 
 			<div id="section_div">
-				
-				<div id="message_div" th:if="${login_message != null}">
-				
-  					<label class="message_label" th:text="${login_message}"></label>
-				
-				</div>
 			
 				<div id="login_div">
+				
+					<div id="message_div" th:if="${login_message != null}">
+					
+	  					<label class="message_label" th:text="${login_message}"></label>
+					
+					</div>
 
 		    		<form id="login_form" method="post" th:action="@{/account/login}">
 		    		

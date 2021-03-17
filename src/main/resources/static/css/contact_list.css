@@ -3,9 +3,7 @@ header {
     font-family: Arial;
 }
 
-#menu_banner {
-
-	height : 48px;
+#header_div {
 
 	display: flex;
 	flex-direction: row;
@@ -13,9 +11,10 @@ header {
 	align-items: center;
 }
 
-#menu_banner_logo {
+#logo_div {
 
 	width: 50%;
+	height : 48px;
 
 	display: flex;
 	flex-direction: row;
@@ -23,7 +22,7 @@ header {
 	align-items: center;
 }
 
-#menu_banner_logo label {
+#logo_div label {
 
 	width: 15%;
 	height : 40px;
@@ -37,32 +36,29 @@ header {
     text-align: center; 
 }
 
-#menu_banner_button {
+#button_div {
 
 	width: 50%;
-
-	margin-right: 1%;
 
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-end;
 	align-items: center;
-
-	column-gap: 4%;
 }
 
-#menu_banner_button a {
+.menu_button {
+	
+	width: 10%;
+	height : 40px;
 
     font-size: 1em;
+    line-height: 40px; 
  	font-weight: normal;
 	text-decoration: none;
 	color: black;
 }
 
-
-#naviguation_banner {
-
-	height : 40px;
+#naviguation_div {
 
 	margin-top: 8px;
 
@@ -75,18 +71,10 @@ header {
   	border-radius: 8px;
 }
 
-#naviguation_banner a {
-
-    font-size: 1em;
- 	font-weight: normal;
-	text-decoration: none;
-	color: rgb(97,174,243);
-}
-
-
-#naviguation_banner_button {
+#path_div {
 
 	width: 100%;
+	height : 48px;
 
 	margin-left: 1%;
 	margin-right: 1%;
@@ -95,8 +83,18 @@ header {
 	flex-direction: row;
 	justify-content: flex-start;
 	align-items: center;
+}
 
-	column-gap: 1%;
+.path_button {
+	
+	width: 4%;
+	height : 40px;
+
+    font-size: 1em;
+    line-height: 40px;
+ 	font-weight: normal;
+	text-decoration: none;
+	color: rgb(97,174,243);
 }
 
 section {
@@ -104,14 +102,14 @@ section {
     font-family: Arial;
 }
 
-#contact_adder {
+#contact_adding_div {
 
 	margin-top: 40px;
 	margin-left: 30%;
 	margin-right: 30%;
 }
 
-#contact_adder_header {
+#contact_adding_title_div {
 
 	height : 48px;
 
@@ -121,13 +119,228 @@ section {
 	align-items: center;
 }
 
-#contact_adder_header h1 {
+.contact_adding_title {
+
+	height : 40px;
 
     font-size: 1.5em;
+    line-height: 40px;
  	font-weight: normal;
 }
 
-#contact_adder_header a {
+#contact_adding_background_div {
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+
+	background-color: rgb(245,245,245);
+	border-radius: 8px;
+}
+
+#adding_message_div {
+
+	margin-top: 16px;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+.adding_message_label {
+
+	width: 100%;
+	height: 20px;
+
+	color: red;
+    line-height: 20px; 
+   	text-align: center;
+    font-size: 1em;
+}
+
+#contact_adding_form {
+	
+	width: 90%;
+	
+	margin-top: 16px;
+	margin-bottom: 16px;
+	
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+#contact_adding_field_div {
+	
+	width: 100%;
+	height: 40px;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+
+}
+
+.adding_input {
+
+	height : 20px;
+
+	font-size: 1em;
+    line-height: 20px; 
+    text-align: center; 
+}
+
+.adding_button {
+
+	width: 20%;
+	height: 40px;
+
+	color: white;
+    font-size: 1em;
+	font-weight: bold;
+    line-height: 40px; 
+	text-align: center;
+	text-decoration: none;
+	background-color: rgb(116,211,106);
+	border-radius: 8px;
+	border: none;
+}
+
+#contact_removing_div {
+
+	margin-top: 16px;
+	margin-left: 30%;
+	margin-right: 30%;
+}
+
+#contact_removing_title_div {
+
+	height : 48px;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.contact_removing_title {
+
+	height : 40px;
+
+    font-size: 1.5em;
+    line-height: 40px;
+ 	font-weight: normal;
+}
+
+#contact_removing_background_div {
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+
+	background-color: rgb(245,245,245);
+	border-radius: 8px;
+}
+
+#removing_message_div {
+
+	margin-top: 16px;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+.removing_message_label {
+
+	width: 100%;
+	height: 20px;
+
+	color: red;
+    line-height: 20px; 
+   	text-align: center;
+    font-size: 1em;
+}
+
+#contact_removing_form {
+	
+	width: 90%;
+	
+	margin-top: 16px;
+	margin-bottom: 16px;
+	
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+#contact_removing_field_div {
+	
+	width: 100%;
+	height: 40px;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+
+}
+
+.removing_select {
+
+	font-size: 1em;
+}
+
+.removing_button {
+
+	width: 20%;
+	height: 40px;
+
+	color: white;
+    font-size: 1em;
+	font-weight: bold;
+    line-height: 40px; 
+	text-align: center;
+	text-decoration: none;
+	background-color: rgb(116,211,106);
+	border-radius: 8px;
+	border: none;
+}
+
+#contact_list_div {
+
+	margin-top: 40px;
+	margin-left: 30%;
+	margin-right: 30%;
+}
+
+#contact_list_title_div {
+
+	height : 48px;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.contact_list_title {
+
+	height : 40px;
+
+    font-size: 1.5em;
+    line-height: 40px;
+ 	font-weight: normal;
+}
+
+.contact_list_title_button {
 
 	width: 25%;
 	height: 40px;
@@ -142,87 +355,26 @@ section {
 	border-radius: 8px;	
 }
 
-#contact_adder_body {
-
-	height : 120px;
+#contact_list_background_div {
 
 	display: flex;
-	flex-direction: row;
-	justify-content: space-around;
-	align-items: center;
-
-	background-color: rgb(245,245,245);
-	border-radius: 8px;
-
-	column-gap: 5%;
-}
-
-#contact_adder_body input {
-
-	width: 30%;
-	height: 40px;
-
-	border-radius: 8px;
-	text-align: center;
-    font-size: 1em;
-}
-
-#contact_adder_body a {
-
-	width: 20%;
-	height: 40px;
-
-	color: white;
-    font-size: 1em;
-	font-weight: bold;
-    line-height: 40px; 
-	text-align: center;
-	text-decoration: none;
-	background-color: rgb(116,211,106);
-	border-radius: 8px;
-}
-
-#contact_table {
-
-	margin-top: 16px;
-	margin-left: 30%;
-	margin-right: 30%;
-}
-
-#contact_table_header {
-
-	height : 48px;
-
-	display: flex;
-	flex-direction: row;
-	justify-content: flex-start;
+	flex-direction: column;
+	justify-content: center;
 	align-items: center;
 }
 
-#contact_table_header h1 {
-
-    font-size: 1.5em;
- 	font-weight: normal;
-}
-
-#contact_table_body {
-
-	height : 400px;
-
-	background-color: rgb(245,245,245);
-}
-
-#contact_table_body table {
+#contact_list_table {
 
 	width : 100%;
-	height : 100%;
 
 	border: 1px solid black;
    	border-color: rgb(200,200,200);
   	border-collapse: collapse;
 }
 
-#contact_table_body th {
+#contact_list_table th {
+	
+	height: 40px;
 
   	color: white;
     font-size: 1.2em;
@@ -231,15 +383,16 @@ section {
  	background-color: rgb(116,211,106);
 }
 
-#contact_table_body tr {
+#contact_list_table tr {
 
+	line-height: 40px;
     font-size: 1em;
     text-align: center; 
 }
 
-#contact_table_body tr:nth-child(odd){
+#contact_list_table tr:nth-child(even){
 
-  	background-color: white;
+  	background-color: rgb(245,245,245);
 }
 
 footer {

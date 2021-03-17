@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.paymybuddy.app.dto.UserContactAddingDto;
 import com.paymybuddy.app.dto.UserContactRemovingDto;
@@ -40,34 +40,35 @@ public class UserContactController {
     }
 	
     @PostMapping("/contact/add")
-    public ModelAndView addUserContact(Model model, 
-    		@RequestParam(value = "email_address") String emailAddress) {
+    public String addUserContact(Model model, RedirectAttributes redirectAttributes, 
+    		@RequestParam(value = "contact_email_address") String contactEmailAddress) {
     	
         logger.info("addUserContact()");        
-        	
-        UserContactAddingDto userContactAddingDto = userContactService.addUserContact(new UserContactAddingDto("antoine.thomas@email", emailAddress));
+
+       
+        UserContactAddingDto userContactAddingDto = userContactService.addUserContact(new UserContactAddingDto("antoine.thomas@email", contactEmailAddress));
         
 		if (userContactAddingDto.isDataValidated() == false) {
 
-		    model.addAttribute("adding_message", userContactAddingDto.getMessage());
+			redirectAttributes.addFlashAttribute("adding_message", userContactAddingDto.getMessage());
 		}
-
-		return new ModelAndView("redirect:/contact_list");
+		
+		return ("redirect:/contact");
     }
 	
-    @PostMapping("/contact/delete")/////////////////////////////////POST NOT DELETE
-    public ModelAndView removeUserContact(Model model,
-    		@RequestParam(value = "email_address") String emailAddress) {
+    @PostMapping("/contact/remove")
+    public String removeUserContact(Model model, RedirectAttributes redirectAttributes,
+    		@RequestParam(value = "contact_email_address") String contactEmailAddress) {
     	
-        logger.info("removeUserContact()");        
-   	
-        UserContactRemovingDto userContactRemovingDto = userContactService.removeUserContact(new UserContactRemovingDto("antoine.thomas@email", emailAddress));
+        logger.info("removeUserContact()");            
+       
+        UserContactRemovingDto userContactRemovingDto = userContactService.removeUserContact(new UserContactRemovingDto("antoine.thomas@email", contactEmailAddress));
         
 		if (userContactRemovingDto.isDataValidated() == false) {
 
-		    model.addAttribute("removing_message", userContactRemovingDto.getMessage());
+			redirectAttributes.addFlashAttribute("removing_message", userContactRemovingDto.getMessage());
 		}
 
-		return new ModelAndView("redirect:/contact_list");
+		return ("redirect:/contact");
     }
 }

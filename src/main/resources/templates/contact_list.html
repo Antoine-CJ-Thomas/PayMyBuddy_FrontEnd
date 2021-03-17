@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
 
     <head>
@@ -11,108 +12,151 @@
 
     <body>
 
-    	<div id="bloc_page">
+    	<header>
+    
+    		<div id="header_div">
 
-	    	<header>
+    			<div id="logo_div">
 
-	    		<div id="menu_banner">
-
-	    			<div id="menu_banner_logo">
-
-	  					<label for="pay_my_buddy">Pay My Buddy</label><br>
-
-		    		</div>
-
-	    			<div id="menu_banner_button">
-
-		   					<a href="home">Home</a>
-		   					<a href="bank">Bank</a>
-		   					<a href="contact">Contact</a>
-		   					<a href="profile">Profile</a>
-		   					<a href="login">Log off</a>
-
-		    		</div>
-
-		    	</div>
-
-	    		<div id="naviguation_banner">
-
-	    			<div id="naviguation_banner_button">
-
-	   					<a href="home">Home /</a>
-	  					<label for="contact">Contact /</label><br>
-
-	    			</div>
+  					<label for="pay_my_buddy">Pay My Buddy</label>
 
 	    		</div>
 
-	    	</header>
+    			<div id="button_div">
 
-	    	<section>
-
-	    		<div id="contact_adder">
-
-		    		<div id="contact_adder_header">
-
-	    				<h1>Add Contact</h1>
-						<a href="contact-transfer">Send Money</a>
-
-		    		</div>
-
-		    		<div id="contact_adder_body">
-
-						<input type="text" id="email_address" name="email_address" placeholder="Email address">
-						<a href="#">Add</a>
-
-		    		</div>
+	   					<a class="menu_button" href="home">Home</a>
+	   					<a class="menu_button" href="bank">Bank</a>
+	   					<a class="menu_button" href="contact">Contact</a>
+	   					<a class="menu_button" href="profile">Profile</a>
+	   					<a class="menu_button" href="login">Log off</a>
 
 	    		</div>
 
-	    		<div id="contact_table">
+	    	</div>
 
-		    		<div id="contact_table_header">
+    		<div id="naviguation_div">
 
-		    			<h1>My contacts</h1>
+    			<div id="path_div">
 
-		    		</div>
+   					<a class="path_button" href="home">Home /</a>
+  					<label for="contact">Contact /</label>
 
-		    		<div id="contact_table_body">
+    			</div>
 
-						<table>
+    		</div>
 
-							<tr>
-								<th>Email Address</th>
-								<th>Name</th>
-							</tr>
+    	</header>
 
-							<tr>
-								<td>Hayley.A@email</td>
-								<td>Hayley . A</td>
-							</tr>
+    	<section>
 
-							<tr>
-								<td>Clara.B@email</td>
-								<td>Clara . B</td>
-							</tr>
+    		<div id="contact_adding_div">
 
-							<tr>
-								<td>Smith.C@email</td>
-								<td>Smith . C</td>
-							</tr>
+	    		<div id="contact_adding_title_div">
 
-						</table>
-
-		    		</div>
+    				<h1 class="contact_adding_title">Add Contact</h1>
 
 	    		</div>
 
-	    	</section>
+	    		<div id="contact_adding_background_div">
+				
+					<div id="adding_message_div" th:if="${adding_message != null}">
+					
+	  					<label class="adding_message_label" th:text="${adding_message}"></label>
+					
+					</div>
 
-			<footer>
+		    		<form id="contact_adding_form" method="post" th:action="@{/contact/add}">
 
-			</footer>
+			    		<div id="contact_adding_field_div">
+		
+							<input type="text" class="adding_input" name="contact_email_address" placeholder="Email address">
+		   					<button type="submit" class="adding_button" >Add</button>
+		
+			    		</div>
+ 	
+					</form>
+		    		
+	    		</div>
 
-    	</div>
+    		</div>
+
+    		<div id="contact_removing_div">
+
+	    		<div id="contact_removing_title_div">
+
+    				<h1 class="contact_removing_title">Remove Contact</h1>
+
+	    		</div>
+
+	    		<div id="contact_removing_background_div">
+				
+					<div id="removing_message_div" th:if="${removing_message != null}">
+					
+	  					<label class="removing_message_label" th:text="${removing_message}"></label>
+					
+					</div>
+
+		    		<form id="contact_removing_form" method="post" th:action="@{/contact/remove}">
+
+			    		<div id="contact_removing_field_div">
+			    		
+				    		<select class="removing_select" name="contact_email_address">
+				    		
+				    			<option selected value="">Select a contact</option>
+							    <option th:each="contact : ${contact_list}" th:value="${contact.emailAddress}" th:text="${contact.emailAddress}"></option>
+							    
+							</select>
+		
+		   					<button type="submit" class="removing_button" >Remove</button>
+		
+			    		</div>
+ 	
+					</form>
+		    		
+	    		</div>
+
+    		</div>
+
+    		<div id="contact_list_div">
+
+	    		<div id="contact_list_title_div">
+
+	    			<h1 class="contact_list_title">My Contacts</h1>
+					<a class="contact_list_title_button" href="/transaction/internal">Send Money</a>
+
+	    		</div>
+
+	    		<div id="contact_list_background_div">
+	
+					<table id="contact_list_table">
+
+						<tr>
+						
+							<th>Email Address</th>
+							<th>First name</th>
+							<th>Last name</th>
+							
+						</tr>
+
+						<tr th:each="contact: ${contact_list}">
+						
+						    <td th:text="${contact.emailAddress}" />
+						    <td th:text="${contact.firstName}" />
+						    <td th:text="${contact.lastName}" />
+						    
+						</tr>
+
+					</table>
+					
+	    		</div>
+
+    		</div>
+
+    	</section>
+
+		<footer>
+
+		</footer>
 
     </body>
 

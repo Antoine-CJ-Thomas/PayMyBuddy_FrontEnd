@@ -99,14 +99,14 @@
 		    		</div>
 	
 		    		<div id="edition_background_div">
+				
+						<div id="edition_message_div" th:if="${edition_message != null}">
+						
+		  					<label class="edition_message_label" th:text="${edition_message}"></label>
+						
+						</div>
 
 			    		<form id="edition_form" method="post" th:action="@{/account/edit}">
-				
-							<div id="message_div" th:if="${edition_message != null}">
-							
-			  					<label class="message_label" th:text="${edition_message}"></label>
-							
-							</div>
 
 	    					<div class="edition_field_div">
 				    		
@@ -150,14 +150,14 @@
 		    		</div>
 	
 		    		<div id="deletion_background_div">
+				
+						<div id="deletion_message_div" th:if="${deletion_message != null}">
+						
+		  					<label class="deletion_message_label" th:text="${deletion_message}"></label>
+						
+						</div>
 
 			    		<form id="deletion_form" method="post" th:action="@{/account/delete}">
-				
-							<div id="message_div" th:if="${deletion_message != null}">
-							
-			  					<label class="message_label" th:text="${deletion_message}"></label>
-							
-							</div>
 
 	    					<div class="deletion_field_div">
 					    		

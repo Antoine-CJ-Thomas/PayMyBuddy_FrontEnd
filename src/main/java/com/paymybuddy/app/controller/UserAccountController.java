@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.paymybuddy.app.dto.UserAccountCreatingDto;
 import com.paymybuddy.app.dto.UserAccountDeletingDto;
@@ -34,12 +34,12 @@ public class UserAccountController {
 	
     @GetMapping(value = "/registration")
     public String registrationWebPage(Model model) {
-        logger.info("registrationWebPage()");        
+        logger.info("registrationWebPage()");               
         return "/registration.html";
     }
 
     @PostMapping(value = "/account/create")
-    public ModelAndView createUserAccount(Model model, 
+    public String createUserAccount(Model model, RedirectAttributes redirectAttributes,
     		@RequestParam(value = "email_address") String emailAddress, 
     		@RequestParam(value = "password") String password, 
     		@RequestParam(value = "first_name") String firstName, 
@@ -48,29 +48,29 @@ public class UserAccountController {
         logger.info("createUserAccount()");        
         	
         UserAccountCreatingDto userAccountCreatingDto = userAccountService.createUserAccount(new UserAccountCreatingDto(emailAddress, password, firstName, lastName));
-        
+                
 		if (userAccountCreatingDto.isDataValidated()) {
-
-			pageName = "/login";
+	        
+        	pageName = "/login";
 		}
 		
 		else {
 			
-		    model.addAttribute("registration_message", userAccountCreatingDto.getMessage());
-			pageName = "/registration";
+			redirectAttributes.addFlashAttribute("registration_message", userAccountCreatingDto.getMessage());
+        	pageName = "/registration";
 		}
 		
-		return new ModelAndView("redirect:" + pageName);
+		return ("redirect:" + pageName);
     }
 	
     @GetMapping(value = {"/", "/login"})
     public String loginWebPage(Model model) {
         logger.info("loginWebPage()");
-        return "/index.html";
+        return "/login.html";
     }
     
     @PostMapping(value = "/account/login")
-    public ModelAndView loginUserAccount(Model model, 
+    public String loginUserAccount(Model model, RedirectAttributes redirectAttributes,
     		@RequestParam(value = "email_address") String emailAddress, 
     		@RequestParam(value = "password") String password) {
     	
@@ -83,12 +83,13 @@ public class UserAccountController {
         }        
         
         else {
-        	
-            model.addAttribute("login_message", userAccountLoginDto.getMessage());
-        	pageName = "/index";
+
+			System.out.println(userAccountLoginDto.getMessage());
+			redirectAttributes.addFlashAttribute("login_message", userAccountLoginDto.getMessage());
+        	pageName = "/login";
         }
 		
-		return new ModelAndView("redirect:" + pageName);
+		return ("redirect:" + pageName);
     }
 	
     @GetMapping(value = "/home")
@@ -116,7 +117,7 @@ public class UserAccountController {
     }
 
 	@PostMapping(value = "/account/edit")
-	public ModelAndView editUserAccount(Model model,
+	public String editUserAccount(Model model, RedirectAttributes redirectAttributes,
     		@RequestParam(value = "password") String password,
     		@RequestParam(value = "first_name") String first_name,
     		@RequestParam(value = "last_name") String last_name) {
@@ -132,15 +133,16 @@ public class UserAccountController {
 		
 		else {
 			
-		    model.addAttribute("edition_message", userAccountEditingDto.getMessage());
+			System.out.println(userAccountEditingDto.getMessage());
+			redirectAttributes.addFlashAttribute("edition_message", userAccountEditingDto.getMessage());
 			pageName = "/profile";
 		}
 
-		return new ModelAndView("redirect:" + pageName);
+		return ("redirect:" + pageName);
 	}
 	
     @PostMapping(value = "/account/delete")
-    public ModelAndView deleteUserAccount(Model model,
+    public String deleteUserAccount(Model model, RedirectAttributes redirectAttributes,
     		@RequestParam(value = "password") String password) {
     	
         logger.info("deleteUserAccount()");        
@@ -149,15 +151,16 @@ public class UserAccountController {
 	    
 		if (userAccountDeletingDto.isDataValidated()) {
 	
-			pageName = "/index";
+			pageName = "/login";
 		}
 		
 		else {
-			
-		    model.addAttribute("deletion_message", userAccountDeletingDto.getMessage());
+
+			System.out.println(userAccountDeletingDto.getMessage());
+			redirectAttributes.addFlashAttribute("deletion_message", userAccountDeletingDto.getMessage());
 			pageName = "/profile";
 		}
 		
-		return new ModelAndView("redirect:" + pageName);
+		return ("redirect:" + pageName);
     }
 }
