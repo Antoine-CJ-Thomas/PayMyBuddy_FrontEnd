@@ -28,7 +28,7 @@ public class UserContactController {
         logger.info("UserContactController()");
 	}
 	
-    @GetMapping("/contact")
+    @GetMapping(value = "/contact")
     public String retrieveUserContactList(Model model) {
         logger.info("retrieveUserContactList()");
     	
@@ -39,7 +39,7 @@ public class UserContactController {
         return "/contact_list.html";
     }
 	
-    @PostMapping("/contact/add")
+    @PostMapping(value = "/contact/add")
     public String addUserContact(Model model, RedirectAttributes redirectAttributes, 
     		@RequestParam(value = "contact_email_address") String contactEmailAddress) {
     	
@@ -56,7 +56,7 @@ public class UserContactController {
 		return ("redirect:/contact");
     }
 	
-    @PostMapping("/contact/remove")
+    @PostMapping(value = "/contact/remove")
     public String removeUserContact(Model model, RedirectAttributes redirectAttributes,
     		@RequestParam(value = "contact_email_address") String contactEmailAddress) {
     	

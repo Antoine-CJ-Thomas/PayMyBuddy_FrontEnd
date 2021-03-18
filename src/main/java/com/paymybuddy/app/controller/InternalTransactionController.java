@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.paymybuddy.app.dto.InternalTransactionExecutingDto;
 import com.paymybuddy.app.dto.InternalTransactionRetrievingDto;
@@ -27,7 +27,7 @@ public class InternalTransactionController {
         logger.info("InternalTransactionController()");
 	}
 	
-    @GetMapping("/contact/transaction")
+    @GetMapping(value = "/contact/transaction")
     public String retrieveInternalTransactionList(Model model) {
         logger.info("retrieveInternalTransactionList()");
     	
@@ -38,8 +38,8 @@ public class InternalTransactionController {
         return "contact_transaction.html";
     }
 	
-    @PostMapping("/internal_transaction/execute")
-    public ModelAndView executeInternalTransaction(Model model, 
+    @PostMapping(value = "/contact/transaction/execute")
+    public String executeInternalTransaction(Model model, RedirectAttributes redirectAttributes, 
     		@RequestParam(value = "contact_email_address") String contactEmailAddress,
     		@RequestParam(value = "description") String description,
     		@RequestParam(value = "amount") float amount) {
@@ -50,9 +50,9 @@ public class InternalTransactionController {
         
 		if (internalTransactionExecutingDto.isDataValidated() == false) {
 
-		    model.addAttribute("execution_message", internalTransactionExecutingDto.getMessage());
+			redirectAttributes.addFlashAttribute("execution_message", internalTransactionExecutingDto.getMessage());
 		}
 
-		return new ModelAndView("redirect:/contact/transaction");
+		return ("redirect:/contact/transaction");
     }
 }

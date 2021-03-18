@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.paymybuddy.app.dto.ExternalTransactionExecutingDto;
 import com.paymybuddy.app.dto.ExternalTransactionRetrievingDto;
@@ -27,7 +27,7 @@ public class ExternalTransactionController {
         logger.info("ExternalTransactionController()");
 	}
 
-    @GetMapping("/bank/transaction")
+    @GetMapping(value = "/bank/transaction")
     public String retrieveExternalTransactionList(Model model) {
         logger.info("retrieveExternalTransactionList()");
     	
@@ -35,11 +35,11 @@ public class ExternalTransactionController {
 
         model.addAttribute("External_transaction_list", externalTransactionRetrievingDto.getExternalTransactionList());
         
-        return "bank_account_transaction.html";
+        return "bank_transaction.html";
     }
 	
-    @PostMapping("/External_transaction/execute")
-    public ModelAndView executeExternalTransaction(Model model, 
+    @PostMapping(value = "/bank/transaction/execute")
+    public String executeExternalTransaction(Model model, RedirectAttributes redirectAttributes, 
     		@RequestParam(value = "account_number") String accountNumber,
     		@RequestParam(value = "swift_code") String swiftCode,
     		@RequestParam(value = "description") String description,
@@ -51,9 +51,9 @@ public class ExternalTransactionController {
         
 		if (externalTransactionExecutingDto.isDataValidated() == false) {
 
-		    model.addAttribute("execution_message", externalTransactionExecutingDto.getMessage());
+			redirectAttributes.addFlashAttribute("execution_message", externalTransactionExecutingDto.getMessage());
 		}
 
-		return new ModelAndView("redirect:/bank/transaction");
+		return ("redirect:/bank/transaction");
     }
 }

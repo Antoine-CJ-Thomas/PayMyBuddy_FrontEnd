@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.paymybuddy.app.dto.BankAccountAddingDto;
 import com.paymybuddy.app.dto.BankAccountRemovingDto;
@@ -28,7 +28,7 @@ public class BankAccountController {
         logger.info("BankAccountController()");
 	}
 	
-    @GetMapping("/bank")
+    @GetMapping(value = "/bank")
     public String retrieveBankAccountList(Model model) {
         logger.info("retrieveBankAccountList()");
     	
@@ -36,40 +36,40 @@ public class BankAccountController {
 
         model.addAttribute("bank_account_list", BankAccountRetrievingDto.getBankAccountList());
         
-        return "bank_account_list.html";
+        return "/bank_list.html";
     }
 	
-    @PostMapping("/bank_account/add")
-    public ModelAndView addBankAccount(Model model, 
+    @PostMapping(value = "/bank/add")
+    public String addBankAccount(Model model, RedirectAttributes redirectAttributes, 
+    		@RequestParam(value = "account_name") String accountName,
     		@RequestParam(value = "account_number") String accountNumber,
     		@RequestParam(value = "swift_code") String swiftCode) {
     	
         logger.info("addBankAccount()");        
         	
-        BankAccountAddingDto BankAccountAddingDto = bankAccountService.addBankAccount(new BankAccountAddingDto("antoine.thomas@email", accountNumber, swiftCode));
+        BankAccountAddingDto BankAccountAddingDto = bankAccountService.addBankAccount(new BankAccountAddingDto("antoine.thomas@email", accountName, accountNumber, swiftCode));
         
 		if (BankAccountAddingDto.isDataValidated() == false) {
 
-		    model.addAttribute("adding_message", BankAccountAddingDto.getMessage());
+			redirectAttributes.addFlashAttribute("adding_message", BankAccountAddingDto.getMessage());
 		}
 
-		return new ModelAndView("redirect:/bank");
+		return ("redirect:/bank");
     }
 	
-    @PostMapping("/bank_account/delete")
-    public ModelAndView removeBankAccount(Model model,
-    		@RequestParam(value = "account_number") String accountNumber,
-    		@RequestParam(value = "swift_code") String swiftCode) {
+    @PostMapping(value = "/bank/remove")
+    public String removeBankAccount(Model model, RedirectAttributes redirectAttributes, 
+    		@RequestParam(value = "account_name") String accountName) {
     	
         logger.info("removeBankAccount()");
    	
-        BankAccountRemovingDto BankAccountRemovingDto = bankAccountService.removeBankAccount(new BankAccountRemovingDto("antoine.thomas@email", accountNumber, swiftCode));
+        BankAccountRemovingDto BankAccountRemovingDto = bankAccountService.removeBankAccount(new BankAccountRemovingDto("antoine.thomas@email", accountName));
         
 		if (BankAccountRemovingDto.isDataValidated() == false) {
 
-		    model.addAttribute("removing_message", BankAccountRemovingDto.getMessage());
+			redirectAttributes.addFlashAttribute("removing_message", BankAccountRemovingDto.getMessage());
 		}
 
-		return new ModelAndView("redirect:/bank");
+		return ("redirect:/bank");
     }
 }
