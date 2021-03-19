@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.paymybuddy.app.dto.BankAccountRetrievingDto;
 import com.paymybuddy.app.dto.ExternalTransactionExecutingDto;
 import com.paymybuddy.app.dto.ExternalTransactionRetrievingDto;
+import com.paymybuddy.app.service.BankAccountService;
 import com.paymybuddy.app.service.ExternalTransactionService;
 
 @Controller
@@ -21,6 +23,8 @@ public class ExternalTransactionController {
 
     @Autowired
 	private ExternalTransactionService externalTransactionService;
+    @Autowired
+	private BankAccountService bankAccountService;
 	
 	
 	public ExternalTransactionController() {
@@ -33,21 +37,24 @@ public class ExternalTransactionController {
     	
         ExternalTransactionRetrievingDto externalTransactionRetrievingDto = externalTransactionService.retrieveExternalTransactionList(new ExternalTransactionRetrievingDto("antoine.thomas@email"));
 
-        model.addAttribute("External_transaction_list", externalTransactionRetrievingDto.getExternalTransactionList());
+        model.addAttribute("transaction_list", externalTransactionRetrievingDto.getExternalTransactionList());
+    	
+        BankAccountRetrievingDto BankAccountRetrievingDto = bankAccountService.retrieveBankAccountList(new BankAccountRetrievingDto("antoine.thomas@email"));
+
+        model.addAttribute("bank_account_list", BankAccountRetrievingDto.getBankAccountList());
         
         return "bank_transaction.html";
     }
 	
-    @PostMapping(value = "/bank/transaction/execute")
+    @PostMapping(value = "/bank/transaction")
     public String executeExternalTransaction(Model model, RedirectAttributes redirectAttributes, 
-    		@RequestParam(value = "account_number") String accountNumber,
-    		@RequestParam(value = "swift_code") String swiftCode,
+    		@RequestParam(value = "account_name") String accountName,
     		@RequestParam(value = "description") String description,
     		@RequestParam(value = "amount") float amount) {
     	
         logger.info("executeExternalTransaction()");
         	
-        ExternalTransactionExecutingDto externalTransactionExecutingDto = externalTransactionService.executeExternalTransaction(new ExternalTransactionExecutingDto("antoine.thomas@email", accountNumber, swiftCode, description, amount));
+        ExternalTransactionExecutingDto externalTransactionExecutingDto = externalTransactionService.executeExternalTransaction(new ExternalTransactionExecutingDto("antoine.thomas@email", accountName, description, amount));
         
 		if (externalTransactionExecutingDto.isDataValidated() == false) {
 
