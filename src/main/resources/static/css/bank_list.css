@@ -83,11 +83,11 @@ header {
 	flex-direction: row;
 	justify-content: flex-start;
 	align-items: center;
+	gap: 1%;
 }
 
 .path_button {
 	
-	width: 4%;
 	height : 40px;
 
     font-size: 1em;
@@ -95,6 +95,15 @@ header {
  	font-weight: normal;
 	text-decoration: none;
 	color: rgb(97,174,243);
+}
+
+.path_label {
+	
+	height : 40px;
+
+    font-size: 1em;
+    line-height: 40px;
+ 	font-weight: normal;
 }
 
 section {

@@ -1,148 +1,136 @@
 <!DOCTYPE html>
+
 <html>
 
     <head>
 
         <meta charset="utf-8" />
         <link rel="stylesheet" href="/css/contact_transaction.css" />
-        <title>Pay My Buddy - contact transaction</title>
+        <title>Pay My Buddy - contact list</title>
 
     </head>
 
     <body>
 
-    	<div id="bloc_page">
+    	<header>
+    
+    		<div id="header_div">
 
-	    	<header>
+    			<div id="logo_div">
 
-	    		<div id="menu_banner">
-
-	    			<div id="menu_banner_logo">
-
-	  					<label for="pay_my_buddy">Pay My Buddy</label><br>
-
-		    		</div>
-
-	    			<div id="menu_banner_button">
-
-		   					<a href="home">Home</a>
-		   					<a href="bank">Bank</a>
-		   					<a href="contact">Contact</a>
-		   					<a href="profile">Profile</a>
-		   					<a href="login">Log off</a>
-
-		    		</div>
-
-		    	</div>
-
-	    		<div id="naviguation_banner">
-
-	    			<div id="naviguation_banner_button">
-
-	   					<a href="home">Home /</a>
-	   					<a href="contact">Contact /</a>
-	  					<label for="transfer">Transfer /</label><br>
-
-	    			</div>
+  					<label for="pay_my_buddy">Pay My Buddy</label>
 
 	    		</div>
 
-	    	</header>
+    			<div id="button_div">
 
-	    	<section>
-
-	    		<div id="money_sender">
-
-		    		<div id="money_sender_header">
-
-	    				<h1>Send Money</h1>
-						<a href="contact">Add contact</a>
-
-		    		</div>
-
-		    		<div id="money_sender_body">
-
-						<select name="contacts" id="contacts">
-
-							<option value="" disabled selected>Contact</option>
-							<option value="contact_1">contact 1</option>
-							<option value="contact_2">contact 2</option>
-							<option value="contact_3">contact 3</option>
-							<option value="contact_4">contact 4</option>
-
-						</select>
-
-						<input type="text" id="description" name="description" placeholder="Description">
-
-						<input type="number" id="amount" name="amount" min="0" max="100" placeholder="  0€">
-
-						<a href="#">Send</a>
-
-		    		</div>
- 
-	    		</div>
-
-	    		<div id="transaction_table">
-
-		    		<div id="transaction_table_header">
-
-		    			<h1>My contacts transactions</h1>
-
-		    		</div>
-
-		    		<div id="transaction_table_body">
-
-						<table>
-
-							<tr>
-								<th>Contact</th>
-								<th>Description</th>
-								<th>Amount</th>
-							</tr>
-
-							<tr>
-								<td>Hayley</td>
-								<td>Restaurant bill share</td>
-								<td>10€</td>
-							</tr>
-
-							<tr>
-								<td>Clara</td>
-								<td>Trip money</td>
-								<td>25€</td>
-							</tr>
-
-							<tr>
-								<td>Smith</td>
-								<td>Movie tickets</td>
-								<td>8€</td>
-							</tr>
-
-						</table>
-
-		    		</div>
-
-	    			<div id="transaction_table_footer">
-
-	   					<a href="#"><<</a>
-	   					<a href="#">1</a>
-	   					<a href="#">2</a>
-	   					<a href="#">3</a>
-	   					<a href="#">4</a>
-	   					<a href="#">5</a>
-	   					<a href="#">>></a>
-
-	    			</div>
+	   					<a class="menu_button" href="/home">Home</a>
+	   					<a class="menu_button" href="/bank">Bank</a>
+	   					<a class="menu_button" href="/contact">Contact</a>
+	   					<a class="menu_button" href="/profile">Profile</a>
+	   					<a class="menu_button" href="/login">Log off</a>
 
 	    		</div>
 
-	    	</section>
+	    	</div>
 
-			<footer>
+    		<div id="naviguation_div">
 
-			</footer>
+    			<div id="path_div">
 
-    	</div>
+   					<a class="path_button" href="/home">Home /</a>
+   					<a class="path_button" href="/contact">Contact /</a>
+  					<label class="path_label" for="contact">Transaction /</label>
+
+    			</div>
+
+    		</div>
+
+    	</header>
+
+    	<section>
+
+    		<div id="money_sending_div">
+
+	    		<div id="money_sending_title_div">
+
+    				<h1 class="money_sending_title">Send Money</h1>
+
+	    		</div>
+
+	    		<div id="money_sending_background_div">
+				
+					<div id="sending_message_div" th:if="${sending_message != null}">
+					
+	  					<label class="sending_message_label" th:text="${sending_message}"></label>
+					
+					</div>
+
+		    		<form id="money_sending_form" method="post" th:action="@{/contact/transaction}">
+
+			    		<div id="money_sending_field_div">
+			    		
+				    		<select class="sending_select" name="contact_email_address" required>
+				    		
+				    			<option disabled selected value="" >Select a contact</option>
+							    <option th:each="contact : ${contact_list}" th:value="${contact.emailAddress}" th:text="${contact.emailAddress}"></option>
+							    
+							</select>
+		
+							<input type="text" class="sending_input" name="description" placeholder="Description" required>
+							<input type="number"step="0.01" class="sending_input" min="0.00" name="amount" placeholder="0.00€" required>
+		   					<button type="submit" class="sending_button" >Send</button>
+		
+			    		</div>
+ 	
+					</form>
+		    		
+	    		</div>
+
+    		</div>
+
+    		<div id="contact_transaction_div">
+
+	    		<div id="contact_transaction_title_div">
+
+	    			<h1 class="contact_transaction_title">My Transactions</h1>
+					<a class="contact_transaction_title_button" href="/contact">Add Contact</a>
+
+	    		</div>
+
+	    		<div id="contact_transaction_background_div">
+	
+					<table id="contact_transaction_table">
+
+						<tr>
+						
+							<th>Email Address</th>
+							<th>Date</th>
+							<th>Description</th>
+							<th>Amount</th>
+							
+						</tr>
+
+						<tr th:each="transaction: ${transaction_list}">
+						
+						    <td th:text="${transaction.userContact.emailAddress}" />
+						    <td th:text="${transaction.dateAndTime}" />
+						    <td th:text="${transaction.description}" />
+						    <td th:text="${transaction.amount}" />
+						    
+						</tr>
+
+					</table>
+					
+	    		</div>
+
+    		</div>
+
+    	</section>
+
+		<footer>
+
+		</footer>
 
     </body>
 

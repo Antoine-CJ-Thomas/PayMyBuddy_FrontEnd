@@ -12,7 +12,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.paymybuddy.app.dto.InternalTransactionExecutingDto;
 import com.paymybuddy.app.dto.InternalTransactionRetrievingDto;
+import com.paymybuddy.app.dto.UserContactRetrievingDto;
 import com.paymybuddy.app.service.InternalTransactionService;
+import com.paymybuddy.app.service.UserContactService;
 
 @Controller
 public class InternalTransactionController {
@@ -21,6 +23,8 @@ public class InternalTransactionController {
 
     @Autowired
 	private InternalTransactionService internalTransactionService;
+    @Autowired
+	private UserContactService userContactService;
 	
 	
 	public InternalTransactionController() {
@@ -33,12 +37,16 @@ public class InternalTransactionController {
     	
         InternalTransactionRetrievingDto internalTransactionRetrievingDto = internalTransactionService.retrieveInternalTransactionList(new InternalTransactionRetrievingDto("antoine.thomas@email"));
 
-        model.addAttribute("internal_transaction_list", internalTransactionRetrievingDto.getInternalTransactionList());
+        model.addAttribute("transaction_list", internalTransactionRetrievingDto.getInternalTransactionList());
+    	
+        UserContactRetrievingDto userContactRetrievingDto = userContactService.retrieveUserContactList(new UserContactRetrievingDto("antoine.thomas@email"));
+
+        model.addAttribute("contact_list", userContactRetrievingDto.getUserContactList());
         
         return "contact_transaction.html";
     }
 	
-    @PostMapping(value = "/contact/transaction/execute")
+    @PostMapping(value = "/contact/transaction")
     public String executeInternalTransaction(Model model, RedirectAttributes redirectAttributes, 
     		@RequestParam(value = "contact_email_address") String contactEmailAddress,
     		@RequestParam(value = "description") String description,
