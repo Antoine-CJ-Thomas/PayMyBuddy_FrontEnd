@@ -6,7 +6,7 @@
 
         <meta charset="utf-8" />
         <link rel="stylesheet" href="/css/registration.css" />
-        <title>Pay My Buddy - index</title>
+        <title>Pay My Buddy - registration</title>
 
     </head>
 
@@ -14,45 +14,57 @@
 
     	<header>
 
-	    		<div id="image_div">
+	    		<div id="logo_div">
 
-  					<img src="images/logo.png" alt="Pay My Buddy logo">
+  					<img src="/images/logo.png" alt="Pay My Buddy logo">
 
 	    		</div>
 
     	</header>
 
     	<section>
-
-			<div id="section_div">
 			
+			<div id="main_div">
+    	
 				<div id="register_div">
 				
-					<div id="message_div" th:if="${registration_message != null}">
+					<div id="register_message_div" th:if="${registration_message != null}">
 					
-	  					<label class="message_label" th:text="${registration_message}"></label>
+	  					<label th:text="${registration_message}"></label>
 					
 					</div>
-
-		    		<form id="register_form" method="post" th:action="@{/account/create}">
-
-			    		<div id="name_div">
-								
-							<input type="text" id="first_name_input" class="text_input" name="first_name" placeholder="First name" required>
-							<input type="text" id="last_name_input" class="text_input" name="last_name" placeholder="Last name" required>
-
-			    		</div>
-		    		
-	  					<input type="text" id="email_address_input" class="text_input" name="email_address" placeholder="Email" required>
-	  					<input type="password" id="password_input" class="text_input" name="password" placeholder="Password" required>
-	  					
-	    				<button type="submit" class="register_submit_button">Register</button>
-						
-					</form>
-
+	
+			    	<div id="register_form_div">
+			    		
+			    		<form method="post" th:action="@{/account/create}">
+	
+				    		<div id="register_form_name_div">
+									
+								<input type="text" name="first_name" placeholder="First name" required>
+								<input type="text" name="last_name" placeholder="Last name" required>
+	
+				    		</div>
+	
+				    		<div id="register_form_identifier_div">
+				    		
+			  					<input type="text" name="email_address" placeholder="Email" required>
+			  					<input type="password" name="password" placeholder="Password" required>
+			  					
+				    		</div>
+	
+				    		<div id="register_form_button_div">
+				    		
+		    					<button type="submit" class="register_submit_button">Register</button>
+		    					
+				    		</div>
+				    		
+						</form>
+			    	
+					</div>
+	
 	    		</div>
 
-	    	</div>
+    		</div>
 
     	</section>
 

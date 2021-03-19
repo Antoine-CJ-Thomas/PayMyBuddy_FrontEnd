@@ -6,7 +6,7 @@
 
         <meta charset="utf-8" />
         <link rel="stylesheet" href="/css/login.css" />
-        <title>Pay My Buddy - index</title>
+        <title>Pay My Buddy - login</title>
 
     </head>
 
@@ -14,7 +14,7 @@
 
     	<header>
 
-	    		<div id="image_div">
+	    		<div id="logo_div">
 
   					<img src="images/logo.png" alt="Pay My Buddy logo">
 
@@ -23,46 +23,58 @@
     	</header>
 
     	<section>
-
-			<div id="section_div">
+			
+			<div id="main_div">
 			
 				<div id="login_div">
 				
-					<div id="message_div" th:if="${login_message != null}">
+					<div id="login_message_div" th:if="${login_message != null}">
 					
-	  					<label class="message_label" th:text="${login_message}"></label>
+	  					<label th:text="${login_message}"></label>
 					
 					</div>
-
-		    		<form id="login_form" method="post" th:action="@{/account/login}">
-		    		
-	  					<input type="text" class="text_input" name="email_address" placeholder="Email" required>
-	  					<input type="password" class="text_input" name="password" placeholder="Password" required>
-	  					
-	    				<button type="submit" class="login_submit_button">Login</button>
 	
-			    		<div id="checkbox_div">
+		    		<div id="login_form_div">
+	
+			    		<form method="post" th:action="@{/account/login}">
 			    		
-		  					<input type="checkbox" class="checkbox_input" name="remember" checked>
-		  					<label class="checkbox_label" for="Remember_me">Remember me</label>
-		  					
-				    	</div>
-						
-					</form>
-
+				    		<div id="login_form_identifier_div">
+				    		
+			  					<input type="text" name="email_address" placeholder="Email" required>
+			  					<input type="password" name="password" placeholder="Password" required>
+			  					
+				    		</div>
+	
+				    		<div id="login_form_button_div">
+				    		
+		    					<button type="submit">Login</button>
+		    					
+				    		</div>
+			    		
+				    		<div id="login_form_checkbox_div">
+				    		
+			  					<input type="checkbox" name="remember" checked>
+			  					<label for="Remember_me">Remember me</label>
+			  					
+					    	</div>
+							
+						</form>
+		
+		    		</div>
+	
 	    		</div>
-
+	
 	    		<div id="separation_div">
-
+	
 	    		</div>
-
+	
 	    		<div id="registration_div">
 	    		
-   					<a class="register_button" href="/registration">Register</a>
-
+					<a href="/registration">Register</a>
+	
 	    		</div>
 
-	    	</div>
+    		</div>
 
     	</section>
 
