@@ -138,9 +138,6 @@ section {
 
 	margin-top: 16px;
 	margin-bottom: 16px;
-}
-
-#register_form {
 	
 	display: flex;
 	flex-direction: column;
@@ -148,7 +145,7 @@ section {
 	align-items: center;
 }
 
-.register_submit_button {
+.register_button {
 
 	width: 50%;
 	height: 40px;

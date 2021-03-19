@@ -69,7 +69,7 @@
 
 			    		<div id="contact_adding_field_div">
 		
-							<input type="text" class="adding_input" name="contact_email_address" placeholder="Email address">
+							<input type="text" class="adding_input" name="contact_email_address" placeholder="Email address" required>
 		   					<button type="submit" class="adding_button" >Add</button>
 		
 			    		</div>
@@ -100,9 +100,9 @@
 
 			    		<div id="contact_removing_field_div">
 			    		
-				    		<select class="removing_select" name="contact_email_address">
+				    		<select class="removing_select" name="contact_email_address" required>
 				    		
-				    			<option selected value="">Select a contact</option>
+				    			<option disabled selected value="">Select a contact</option>
 							    <option th:each="contact : ${contact_list}" th:value="${contact.emailAddress}" th:text="${contact.emailAddress}"></option>
 							    
 							</select>
