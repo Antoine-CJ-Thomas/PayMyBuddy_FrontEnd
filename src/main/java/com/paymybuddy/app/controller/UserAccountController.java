@@ -3,6 +3,12 @@ package com.paymybuddy.app.controller;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +24,7 @@ import com.paymybuddy.app.dto.UserAccountRetrievingDto;
 import com.paymybuddy.app.service.UserAccountService;
 
 @Controller
-public class UserAccountController {
+public class UserAccountController extends DaoAuthenticationProvider {
 
     private static final Logger logger = LogManager.getLogger("UserAccountController");
 
@@ -84,7 +90,6 @@ public class UserAccountController {
         
         else {
 
-			System.out.println(userAccountLoginDto.getMessage());
 			redirectAttributes.addFlashAttribute("login_message", userAccountLoginDto.getMessage());
         	pageName = "/login";
         }
@@ -133,7 +138,6 @@ public class UserAccountController {
 		
 		else {
 			
-			System.out.println(userAccountEditingDto.getMessage());
 			redirectAttributes.addFlashAttribute("edition_message", userAccountEditingDto.getMessage());
 			pageName = "/profile";
 		}
@@ -156,11 +160,33 @@ public class UserAccountController {
 		
 		else {
 
-			System.out.println(userAccountDeletingDto.getMessage());
 			redirectAttributes.addFlashAttribute("deletion_message", userAccountDeletingDto.getMessage());
 			pageName = "/profile";
 		}
 		
 		return ("redirect:" + pageName);
+    }
+    
+    @Override
+    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+    	
+        UsernamePasswordAuthenticationToken auth = (UsernamePasswordAuthenticationToken) authentication;
+        
+        String name = auth.getName();
+        String password = auth.getCredentials().toString();
+        
+        UserDetails userDetails = userAccountService.loadUserByUsername(name);
+        
+        if (userDetails == null) {
+        	
+            throw new BadCredentialsException("Username/Password does not match for " + auth.getPrincipal());
+        }
+        
+        return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+    }
+    
+    @Override
+    public boolean supports(Class<?> authentication) {
+        return true;
     }
 }

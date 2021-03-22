@@ -1,8 +1,13 @@
 package com.paymybuddy.app.service;
 
+import java.util.Objects;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.paymybuddy.app.dto.UserAccountCreatingDto;
@@ -10,13 +15,14 @@ import com.paymybuddy.app.dto.UserAccountDeletingDto;
 import com.paymybuddy.app.dto.UserAccountEditingDto;
 import com.paymybuddy.app.dto.UserAccountLoginDto;
 import com.paymybuddy.app.dto.UserAccountRetrievingDto;
+import com.paymybuddy.app.model.UserAccount;
 import com.paymybuddy.app.proxy.UserAccountProxy;
 
 /**
  *
  */
 @Service
-public class UserAccountService {
+public class UserAccountService implements UserDetailsService{
 
     private static final Logger logger = LogManager.getLogger("UserAccountService");
     
@@ -50,5 +56,15 @@ public class UserAccountService {
 	public UserAccountRetrievingDto retrieveUserAccount(UserAccountRetrievingDto userAccountRetrievingDto) {
         logger.info("retrieveUserAccount(" + userAccountRetrievingDto + ")"); 
 		return userAccountProxy.retrieveUserAccount(userAccountRetrievingDto.getEmailAddress());
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String emailAddress) throws UsernameNotFoundException {
+		
+        Objects.requireNonNull(emailAddress);
+        
+        UserAccount userAccount = userAccountProxy.retrieveUserAccount(emailAddress).getUserAccount();////////////////////////////////////////////
+        
+        return userAccount;
 	}
 }

@@ -1,9 +1,14 @@
 package com.paymybuddy.app.model;
 
+import java.io.Serializable;
+import java.util.Collection;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserAccount {
+public class UserAccount implements Serializable, UserDetails {
 
 	private String emailAddress;
 	private String password;
@@ -60,5 +65,35 @@ public class UserAccount {
 
 	public float getBalanceAmount() {
 		return balanceAmount;
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return null;
+	}
+
+	@Override
+	public String getUsername() {
+		return emailAddress;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return true;
 	}
 }
