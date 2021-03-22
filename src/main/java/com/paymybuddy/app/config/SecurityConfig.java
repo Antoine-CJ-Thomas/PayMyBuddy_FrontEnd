@@ -29,7 +29,7 @@ import com.paymybuddy.app.service.UserAccountService;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
     @Autowired
-    UserAccountService  userAccountService;
+    UserAccountService userAccountService;
     
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -84,6 +84,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     	
         provider.setUserDetailsService(userAccountService);
         
-        return null;
+        return provider;
     }
 }
