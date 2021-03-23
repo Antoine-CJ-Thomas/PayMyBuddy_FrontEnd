@@ -3,6 +3,7 @@ package com.paymybuddy.app.controller;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,8 +32,10 @@ public class BankAccountController {
     @GetMapping(value = "/bank")
     public String retrieveBankAccountList(Model model) {
         logger.info("retrieveBankAccountList()");
+        
+        String userEmailAddress = SecurityContextHolder.getContext().getAuthentication().getName();
     	
-        BankAccountRetrievingDto BankAccountRetrievingDto = bankAccountService.retrieveBankAccountList(new BankAccountRetrievingDto("antoine.thomas@email"));
+        BankAccountRetrievingDto BankAccountRetrievingDto = bankAccountService.retrieveBankAccountList(new BankAccountRetrievingDto(userEmailAddress));
 
         model.addAttribute("bank_account_list", BankAccountRetrievingDto.getBankAccountList());
         
@@ -46,8 +49,10 @@ public class BankAccountController {
     		@RequestParam(value = "swift_code") String swiftCode) {
     	
         logger.info("addBankAccount()");        
+        
+        String userEmailAddress = SecurityContextHolder.getContext().getAuthentication().getName();
         	
-        BankAccountAddingDto BankAccountAddingDto = bankAccountService.addBankAccount(new BankAccountAddingDto("antoine.thomas@email", accountName, accountNumber, swiftCode));
+        BankAccountAddingDto BankAccountAddingDto = bankAccountService.addBankAccount(new BankAccountAddingDto(userEmailAddress, accountName, accountNumber, swiftCode));
         
 		if (BankAccountAddingDto.isDataValidated() == false) {
 
@@ -62,8 +67,10 @@ public class BankAccountController {
     		@RequestParam(value = "account_name") String accountName) {
     	
         logger.info("removeBankAccount()");
+        
+        String userEmailAddress = SecurityContextHolder.getContext().getAuthentication().getName();
    	
-        BankAccountRemovingDto BankAccountRemovingDto = bankAccountService.removeBankAccount(new BankAccountRemovingDto("antoine.thomas@email", accountName));
+        BankAccountRemovingDto BankAccountRemovingDto = bankAccountService.removeBankAccount(new BankAccountRemovingDto(userEmailAddress, accountName));
         
 		if (BankAccountRemovingDto.isDataValidated() == false) {
 

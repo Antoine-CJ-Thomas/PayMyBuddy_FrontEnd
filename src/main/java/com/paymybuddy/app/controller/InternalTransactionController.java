@@ -3,6 +3,7 @@ package com.paymybuddy.app.controller;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,12 +35,14 @@ public class InternalTransactionController {
     @GetMapping(value = "/contact/transaction")
     public String retrieveInternalTransactionList(Model model) {
         logger.info("retrieveInternalTransactionList()");
+        
+        String userEmailAddress = SecurityContextHolder.getContext().getAuthentication().getName();
     	
-        InternalTransactionRetrievingDto internalTransactionRetrievingDto = internalTransactionService.retrieveInternalTransactionList(new InternalTransactionRetrievingDto("antoine.thomas@email"));
+        InternalTransactionRetrievingDto internalTransactionRetrievingDto = internalTransactionService.retrieveInternalTransactionList(new InternalTransactionRetrievingDto(userEmailAddress));
 
         model.addAttribute("transaction_list", internalTransactionRetrievingDto.getInternalTransactionList());
     	
-        UserContactRetrievingDto userContactRetrievingDto = userContactService.retrieveUserContactList(new UserContactRetrievingDto("antoine.thomas@email"));
+        UserContactRetrievingDto userContactRetrievingDto = userContactService.retrieveUserContactList(new UserContactRetrievingDto(userEmailAddress));
 
         model.addAttribute("contact_list", userContactRetrievingDto.getUserContactList());
         
@@ -53,8 +56,10 @@ public class InternalTransactionController {
     		@RequestParam(value = "amount") float amount) {
     	
         logger.info("executeInternalTransaction()");
+        
+        String userEmailAddress = SecurityContextHolder.getContext().getAuthentication().getName();
         	
-        InternalTransactionExecutingDto internalTransactionExecutingDto = internalTransactionService.executeInternalTransaction(new InternalTransactionExecutingDto("antoine.thomas@email", contactEmailAddress, description, amount));
+        InternalTransactionExecutingDto internalTransactionExecutingDto = internalTransactionService.executeInternalTransaction(new InternalTransactionExecutingDto(userEmailAddress, contactEmailAddress, description, amount));
         
 		if (internalTransactionExecutingDto.isDataValidated() == false) {
 

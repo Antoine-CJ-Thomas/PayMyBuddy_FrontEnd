@@ -3,12 +3,8 @@ package com.paymybuddy.app.controller;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,12 +15,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.paymybuddy.app.dto.UserAccountCreatingDto;
 import com.paymybuddy.app.dto.UserAccountDeletingDto;
 import com.paymybuddy.app.dto.UserAccountEditingDto;
-import com.paymybuddy.app.dto.UserAccountLoginDto;
 import com.paymybuddy.app.dto.UserAccountRetrievingDto;
 import com.paymybuddy.app.service.UserAccountService;
 
 @Controller
-public class UserAccountController extends DaoAuthenticationProvider {
+public class UserAccountController {
 
     private static final Logger logger = LogManager.getLogger("UserAccountController");
 
@@ -74,34 +69,14 @@ public class UserAccountController extends DaoAuthenticationProvider {
         logger.info("loginWebPage()");
         return "/login.html";
     }
-    
-    @PostMapping(value = "/account/login")
-    public String loginUserAccount(Model model, RedirectAttributes redirectAttributes,
-    		@RequestParam(value = "email_address") String emailAddress, 
-    		@RequestParam(value = "password") String password) {
-    	
-        logger.info("loginUserAccount()");
-        
-        UserAccountLoginDto userAccountLoginDto = userAccountService.loginUserAccount(new UserAccountLoginDto(emailAddress, password));
-                
-        if (userAccountLoginDto.isDataValidated()) {
-        	pageName = "/home";
-        }        
-        
-        else {
-
-			redirectAttributes.addFlashAttribute("login_message", userAccountLoginDto.getMessage());
-        	pageName = "/login";
-        }
-		
-		return ("redirect:" + pageName);
-    }
 	
     @GetMapping(value = "/home")
     public String homeWebPage(Model model) {
         logger.info("homeWebPage()");
         
-    	UserAccountRetrievingDto userAccountRetrievingDto = userAccountService.retrieveUserAccount(new UserAccountRetrievingDto("antoine.thomas@email"));
+        String userEmailAddress = SecurityContextHolder.getContext().getAuthentication().getName();
+                
+    	UserAccountRetrievingDto userAccountRetrievingDto = userAccountService.retrieveUserAccount(new UserAccountRetrievingDto(userEmailAddress));
     	
         model.addAttribute("balance", userAccountRetrievingDto.getUserAccount().getBalanceAmount());
         
@@ -111,8 +86,10 @@ public class UserAccountController extends DaoAuthenticationProvider {
     @GetMapping(value = "/profile")
     public String profileWebPage(Model model) {
         logger.info("profileWebPage()");
+        
+        String userEmailAddress = SecurityContextHolder.getContext().getAuthentication().getName();
     	
-        UserAccountRetrievingDto userAccountRetrievingDto = userAccountService.retrieveUserAccount(new UserAccountRetrievingDto("antoine.thomas@email"));
+        UserAccountRetrievingDto userAccountRetrievingDto = userAccountService.retrieveUserAccount(new UserAccountRetrievingDto(userEmailAddress));
 
         model.addAttribute("email_address", userAccountRetrievingDto.getUserAccount().getEmailAddress());
         model.addAttribute("first_name", userAccountRetrievingDto.getUserAccount().getFirstName());
@@ -128,8 +105,10 @@ public class UserAccountController extends DaoAuthenticationProvider {
     		@RequestParam(value = "last_name") String last_name) {
 		
         logger.info("editUserAccount()");        
+        
+        String userEmailAddress = SecurityContextHolder.getContext().getAuthentication().getName();
    	
-        UserAccountEditingDto userAccountEditingDto = userAccountService.editUserAccount(new UserAccountEditingDto("antoine.thomas@email", password, first_name, last_name));
+        UserAccountEditingDto userAccountEditingDto = userAccountService.editUserAccount(new UserAccountEditingDto(userEmailAddress, password, first_name, last_name));
 	    
 		if (userAccountEditingDto.isDataValidated()) {
 			
@@ -150,8 +129,10 @@ public class UserAccountController extends DaoAuthenticationProvider {
     		@RequestParam(value = "password") String password) {
     	
         logger.info("deleteUserAccount()");        
+        
+        String userEmailAddress = SecurityContextHolder.getContext().getAuthentication().getName();
    	
-	    UserAccountDeletingDto userAccountDeletingDto = userAccountService.deleteUserAccount(new UserAccountDeletingDto("antoine.thomas@email", password));
+	    UserAccountDeletingDto userAccountDeletingDto = userAccountService.deleteUserAccount(new UserAccountDeletingDto(userEmailAddress, password));
 	    
 		if (userAccountDeletingDto.isDataValidated()) {
 	
@@ -165,28 +146,5 @@ public class UserAccountController extends DaoAuthenticationProvider {
 		}
 		
 		return ("redirect:" + pageName);
-    }
-    
-    @Override
-    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-    	
-        UsernamePasswordAuthenticationToken auth = (UsernamePasswordAuthenticationToken) authentication;
-        
-        String name = auth.getName();
-        String password = auth.getCredentials().toString();
-        
-        UserDetails userDetails = userAccountService.loadUserByUsername(name);
-        
-        if (userDetails == null) {
-        	
-            throw new BadCredentialsException("Username/Password does not match for " + auth.getPrincipal());
-        }
-        
-        return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-    }
-    
-    @Override
-    public boolean supports(Class<?> authentication) {
-        return true;
     }
 }

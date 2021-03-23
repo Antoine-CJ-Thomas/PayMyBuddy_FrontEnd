@@ -3,6 +3,7 @@ package com.paymybuddy.app.controller;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,12 +35,14 @@ public class ExternalTransactionController {
     @GetMapping(value = "/bank/transaction")
     public String retrieveExternalTransactionList(Model model) {
         logger.info("retrieveExternalTransactionList()");
+        
+        String userEmailAddress = SecurityContextHolder.getContext().getAuthentication().getName();
     	
-        ExternalTransactionRetrievingDto externalTransactionRetrievingDto = externalTransactionService.retrieveExternalTransactionList(new ExternalTransactionRetrievingDto("antoine.thomas@email"));
+        ExternalTransactionRetrievingDto externalTransactionRetrievingDto = externalTransactionService.retrieveExternalTransactionList(new ExternalTransactionRetrievingDto(userEmailAddress));
 
         model.addAttribute("transaction_list", externalTransactionRetrievingDto.getExternalTransactionList());
     	
-        BankAccountRetrievingDto BankAccountRetrievingDto = bankAccountService.retrieveBankAccountList(new BankAccountRetrievingDto("antoine.thomas@email"));
+        BankAccountRetrievingDto BankAccountRetrievingDto = bankAccountService.retrieveBankAccountList(new BankAccountRetrievingDto(userEmailAddress));
 
         model.addAttribute("bank_account_list", BankAccountRetrievingDto.getBankAccountList());
         
@@ -53,8 +56,10 @@ public class ExternalTransactionController {
     		@RequestParam(value = "amount") float amount) {
     	
         logger.info("executeExternalTransaction()");
+        
+        String userEmailAddress = SecurityContextHolder.getContext().getAuthentication().getName();
         	
-        ExternalTransactionExecutingDto externalTransactionExecutingDto = externalTransactionService.executeExternalTransaction(new ExternalTransactionExecutingDto("antoine.thomas@email", accountName, description, amount));
+        ExternalTransactionExecutingDto externalTransactionExecutingDto = externalTransactionService.executeExternalTransaction(new ExternalTransactionExecutingDto(userEmailAddress, accountName, description, amount));
         
 		if (externalTransactionExecutingDto.isDataValidated() == false) {
 

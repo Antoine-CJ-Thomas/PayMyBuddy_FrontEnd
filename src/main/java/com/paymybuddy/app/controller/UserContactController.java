@@ -3,6 +3,7 @@ package com.paymybuddy.app.controller;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,8 +32,10 @@ public class UserContactController {
     @GetMapping(value = "/contact")
     public String retrieveUserContactList(Model model) {
         logger.info("retrieveUserContactList()");
+        
+        String userEmailAddress = SecurityContextHolder.getContext().getAuthentication().getName();
     	
-        UserContactRetrievingDto userContactRetrievingDto = userContactService.retrieveUserContactList(new UserContactRetrievingDto("antoine.thomas@email"));
+        UserContactRetrievingDto userContactRetrievingDto = userContactService.retrieveUserContactList(new UserContactRetrievingDto(userEmailAddress));
 
         model.addAttribute("contact_list", userContactRetrievingDto.getUserContactList());
         
@@ -43,10 +46,12 @@ public class UserContactController {
     public String addUserContact(Model model, RedirectAttributes redirectAttributes, 
     		@RequestParam(value = "contact_email_address") String contactEmailAddress) {
     	
-        logger.info("addUserContact()");        
+        logger.info("addUserContact()");     
+        
+        String userEmailAddress = SecurityContextHolder.getContext().getAuthentication().getName();   
 
        
-        UserContactAddingDto userContactAddingDto = userContactService.addUserContact(new UserContactAddingDto("antoine.thomas@email", contactEmailAddress));
+        UserContactAddingDto userContactAddingDto = userContactService.addUserContact(new UserContactAddingDto(userEmailAddress, contactEmailAddress));
         
 		if (userContactAddingDto.isDataValidated() == false) {
 
@@ -60,9 +65,11 @@ public class UserContactController {
     public String removeUserContact(Model model, RedirectAttributes redirectAttributes,
     		@RequestParam(value = "contact_email_address") String contactEmailAddress) {
     	
-        logger.info("removeUserContact()");            
+        logger.info("removeUserContact()");  
+        
+        String userEmailAddress = SecurityContextHolder.getContext().getAuthentication().getName();          
        
-        UserContactRemovingDto userContactRemovingDto = userContactService.removeUserContact(new UserContactRemovingDto("antoine.thomas@email", contactEmailAddress));
+        UserContactRemovingDto userContactRemovingDto = userContactService.removeUserContact(new UserContactRemovingDto(userEmailAddress, contactEmailAddress));
         
 		if (userContactRemovingDto.isDataValidated() == false) {
 
