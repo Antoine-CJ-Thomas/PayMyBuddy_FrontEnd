@@ -38,7 +38,7 @@ public class UserAccountController {
         return "/registration.html";
     }
 
-    @PostMapping(value = "/account/create")
+    @PostMapping(value = "/registration")
     public String createUserAccount(Model model, RedirectAttributes redirectAttributes,
     		@RequestParam(value = "email_address") String emailAddress, 
     		@RequestParam(value = "password") String password, 
