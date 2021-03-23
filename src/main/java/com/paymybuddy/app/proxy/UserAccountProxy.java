@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody;import org.springfram
 import com.paymybuddy.app.dto.UserAccountCreatingDto;
 import com.paymybuddy.app.dto.UserAccountDeletingDto;
 import com.paymybuddy.app.dto.UserAccountEditingDto;
-import com.paymybuddy.app.dto.UserAccountLoginDto;
 import com.paymybuddy.app.dto.UserAccountRetrievingDto;
 
 @FeignClient(name = "app-backend", url = "localhost:8080/user")
@@ -27,7 +26,4 @@ public interface UserAccountProxy {
 
 	@GetMapping(value = "/account")
 	public UserAccountRetrievingDto retrieveUserAccount(@RequestParam String emailAddress);
-
-	@PostMapping(value = "/login")
-	public UserAccountLoginDto loginUserAccount(@RequestBody UserAccountLoginDto userAccountLoginDto);
 }

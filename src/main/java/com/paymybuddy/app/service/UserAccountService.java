@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import com.paymybuddy.app.dto.UserAccountCreatingDto;
 import com.paymybuddy.app.dto.UserAccountDeletingDto;
 import com.paymybuddy.app.dto.UserAccountEditingDto;
-import com.paymybuddy.app.dto.UserAccountLoginDto;
 import com.paymybuddy.app.dto.UserAccountRetrievingDto;
 import com.paymybuddy.app.model.UserAccount;
 import com.paymybuddy.app.proxy.UserAccountProxy;
@@ -49,11 +48,6 @@ public class UserAccountService implements UserDetailsService {
 		return userAccountProxy.editUserAccount(userAccountEditingDto);
 	}
 
-	public UserAccountLoginDto loginUserAccount(UserAccountLoginDto userAccountLoginDto) {
-        logger.info("loginUserAccount(" + userAccountLoginDto +")");
-		return userAccountProxy.loginUserAccount(userAccountLoginDto);
-	}
-
 	public UserAccountRetrievingDto retrieveUserAccount(UserAccountRetrievingDto userAccountRetrievingDto) {
         logger.info("retrieveUserAccount(" + userAccountRetrievingDto + ")"); 
 		return userAccountProxy.retrieveUserAccount(userAccountRetrievingDto.getEmailAddress());
@@ -65,7 +59,7 @@ public class UserAccountService implements UserDetailsService {
 		
         Objects.requireNonNull(username);
         
-        UserAccount userAccount = userAccountProxy.retrieveUserAccount(username).getUserAccount();////////////////////////////////////////////
+        UserAccount userAccount = userAccountProxy.retrieveUserAccount(username).getUserAccount();
         
         userAccount.setPassword(BCrypt.hashpw(userAccount.getPassword(), BCrypt.gensalt(12)));
                 
