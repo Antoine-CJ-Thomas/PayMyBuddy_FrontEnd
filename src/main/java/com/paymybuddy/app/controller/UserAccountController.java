@@ -4,6 +4,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,9 +48,11 @@ public class UserAccountController {
     		@RequestParam(value = "first_name") String firstName, 
     		@RequestParam(value = "last_name") String lastName) {
     	
-        logger.info("createUserAccount()");        
+        logger.info("createUserAccount()");      
+        
+        String cryptedPassword = BCrypt.hashpw(password, BCrypt.gensalt(12));
         	
-        UserAccountCreatingDto userAccountCreatingDto = userAccountService.createUserAccount(new UserAccountCreatingDto(emailAddress, password, firstName, lastName));
+        UserAccountCreatingDto userAccountCreatingDto = userAccountService.createUserAccount(new UserAccountCreatingDto(emailAddress, cryptedPassword, firstName, lastName));
                 
 		if (userAccountCreatingDto.isDataValidated()) {
 	        
@@ -106,8 +111,10 @@ public class UserAccountController {
         logger.info("editUserAccount()");        
         
         String userEmailAddress = SecurityContextHolder.getContext().getAuthentication().getName();
+        
+        String cryptedPassword = BCrypt.hashpw(password, BCrypt.gensalt(12));
    	
-        UserAccountEditingDto userAccountEditingDto = userAccountService.editUserAccount(new UserAccountEditingDto(userEmailAddress, password, first_name, last_name));
+        UserAccountEditingDto userAccountEditingDto = userAccountService.editUserAccount(new UserAccountEditingDto(userEmailAddress, cryptedPassword, first_name, last_name));
 	    
 		if (userAccountEditingDto.isDataValidated()) {
 			
@@ -131,16 +138,29 @@ public class UserAccountController {
         
         String userEmailAddress = SecurityContextHolder.getContext().getAuthentication().getName();
    	
-	    UserAccountDeletingDto userAccountDeletingDto = userAccountService.deleteUserAccount(new UserAccountDeletingDto(userEmailAddress, password));
-	    
-		if (userAccountDeletingDto.isDataValidated()) {
-	
-			pageName = "/login";
-		}
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();   
+        
+        UserAccountRetrievingDto userAccountRetrievingDto = userAccountService.retrieveUserAccount(new UserAccountRetrievingDto(userEmailAddress));
+        
+        if(passwordEncoder.matches(password,userAccountRetrievingDto.getUserAccount().getPassword())) {
+            
+    	    UserAccountDeletingDto userAccountDeletingDto = userAccountService.deleteUserAccount(new UserAccountDeletingDto(userEmailAddress));
+    	    
+    		if (userAccountDeletingDto.isDataValidated()) {
+    	
+    			pageName = "/login";
+    		}
+    		
+    		else {
+
+    			redirectAttributes.addFlashAttribute("deletion_message", userAccountDeletingDto.getMessage());
+    			pageName = "/profile";
+    		}
+        }
 		
 		else {
 
-			redirectAttributes.addFlashAttribute("deletion_message", userAccountDeletingDto.getMessage());
+			redirectAttributes.addFlashAttribute("deletion_message", "Invalid password");
 			pageName = "/profile";
 		}
 		
