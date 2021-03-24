@@ -63,7 +63,7 @@ public class InternalTransactionController {
         
 		if (internalTransactionExecutingDto.isDataValidated() == false) {
 
-			redirectAttributes.addFlashAttribute("execution_message", internalTransactionExecutingDto.getMessage());
+			redirectAttributes.addFlashAttribute("sending_message", internalTransactionExecutingDto.getMessage());
 		}
 
 		return ("redirect:/contact/transaction");

@@ -63,7 +63,7 @@ public class ExternalTransactionController {
         
 		if (externalTransactionExecutingDto.isDataValidated() == false) {
 
-			redirectAttributes.addFlashAttribute("execution_message", externalTransactionExecutingDto.getMessage());
+			redirectAttributes.addFlashAttribute("sending_message", externalTransactionExecutingDto.getMessage());
 		}
 
 		return ("redirect:/bank/transaction");
