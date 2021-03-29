@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.paymybuddy.app.dto.UserAccountCreatingDto;
 import com.paymybuddy.app.dto.UserAccountDeletingDto;
 import com.paymybuddy.app.dto.UserAccountEditingDto;
+import com.paymybuddy.app.dto.UserAccountPayementDto;
 import com.paymybuddy.app.dto.UserAccountRetrievingDto;
 import com.paymybuddy.app.proxy.UserAccountProxy;
 
@@ -47,6 +48,11 @@ public class UserAccountService implements UserDetailsService {
 	public UserAccountRetrievingDto retrieveUserAccount(UserAccountRetrievingDto userAccountRetrievingDto) {
         logger.info("retrieveUserAccount(" + userAccountRetrievingDto + ")"); 
 		return userAccountProxy.retrieveUserAccount(userAccountRetrievingDto.getEmailAddress());
+	}
+
+	public UserAccountPayementDto addMoneyToBalance(UserAccountPayementDto userAccountPayementDto) {
+        logger.info("addMoneyToBalance(" + userAccountPayementDto + ")"); 
+		return userAccountProxy.addMoneyToBalance(userAccountPayementDto);
 	}
 
 	@Override

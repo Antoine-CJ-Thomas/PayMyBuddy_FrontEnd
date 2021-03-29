@@ -14,10 +14,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.paymybuddy.app.dto.ExternalTransactionRetrievingDto;
+import com.paymybuddy.app.dto.InternalTransactionRetrievingDto;
 import com.paymybuddy.app.dto.UserAccountCreatingDto;
 import com.paymybuddy.app.dto.UserAccountDeletingDto;
 import com.paymybuddy.app.dto.UserAccountEditingDto;
+import com.paymybuddy.app.dto.UserAccountPayementDto;
 import com.paymybuddy.app.dto.UserAccountRetrievingDto;
+import com.paymybuddy.app.service.ExternalTransactionService;
+import com.paymybuddy.app.service.InternalTransactionService;
 import com.paymybuddy.app.service.UserAccountService;
 
 @Controller
@@ -29,6 +34,10 @@ public class UserAccountController {
     
     @Autowired
 	private UserAccountService userAccountService;
+    @Autowired
+	private InternalTransactionService internalTransactionService;
+    @Autowired
+	private ExternalTransactionService externalTransactionService;
 	
 	
 	public UserAccountController() {
@@ -87,10 +96,46 @@ public class UserAccountController {
         String userEmailAddress = SecurityContextHolder.getContext().getAuthentication().getName();
                 
     	UserAccountRetrievingDto userAccountRetrievingDto = userAccountService.retrieveUserAccount(new UserAccountRetrievingDto(userEmailAddress));
-    	
         model.addAttribute("balance", userAccountRetrievingDto.getUserAccount().getBalanceAmount());
         
+        InternalTransactionRetrievingDto internalTransactionRetrievingDto = internalTransactionService.retrieveInternalTransactionList(new InternalTransactionRetrievingDto(userEmailAddress));
+        model.addAttribute("contact_transaction_list", internalTransactionRetrievingDto.getInternalTransactionList());
+    	
+        ExternalTransactionRetrievingDto externalTransactionRetrievingDto = externalTransactionService.retrieveExternalTransactionList(new ExternalTransactionRetrievingDto(userEmailAddress));
+        model.addAttribute("bank_account_transaction_list", externalTransactionRetrievingDto.getExternalTransactionList());
+        
         return "/home.html";
+    }
+	
+    @GetMapping(value = "/balance")
+    public String balanceWebPage(Model model) {
+        logger.info("balanceWebPage()");          
+        
+        String userEmailAddress = SecurityContextHolder.getContext().getAuthentication().getName();
+                
+    	UserAccountRetrievingDto userAccountRetrievingDto = userAccountService.retrieveUserAccount(new UserAccountRetrievingDto(userEmailAddress));
+        model.addAttribute("balance", userAccountRetrievingDto.getUserAccount().getBalanceAmount());
+        
+        return "/balance.html";
+    }
+
+    @PostMapping(value = "/balance")
+    public String addMoneyToBalance(Model model, RedirectAttributes redirectAttributes,
+    		@RequestParam(value = "card_number") String cardNumber, 
+    		@RequestParam(value = "card_expiration") String cardExpiration, 
+    		@RequestParam(value = "card_cryptogram") String cardCryptogram, 
+    		@RequestParam(value = "payement_amount") float payementAmount) {
+        
+        String userEmailAddress = SecurityContextHolder.getContext().getAuthentication().getName();
+    	
+    	UserAccountPayementDto userAccountPayementDto = userAccountService.addMoneyToBalance(new UserAccountPayementDto(userEmailAddress, cardNumber, cardExpiration, cardCryptogram, payementAmount));
+        
+		if (userAccountPayementDto.isDataValidated() == false) {
+
+			redirectAttributes.addFlashAttribute("payement_message", userAccountPayementDto.getMessage());
+		}
+    	
+		return ("redirect:/balance");
     }
 	
     @GetMapping(value = "/profile")

@@ -58,7 +58,6 @@ header {
 	color: black;
 }
 
-
 #naviguation_div {
 
 	margin-top: 8px;
@@ -85,6 +84,17 @@ header {
 	justify-content: flex-start;
 	align-items: center;
 	gap: 1%;
+}
+
+.path_button {
+	
+	height : 40px;
+
+    font-size: 1em;
+    line-height: 40px;
+ 	font-weight: normal;
+	text-decoration: none;
+	color: rgb(97,174,243);
 }
 
 .path_label {
@@ -173,14 +183,14 @@ section {
  	font-weight: bold;
 }
 
-#contact_transaction_div {
+#payment_div {
 
 	margin-top: 16px;
 	margin-left: 30%;
 	margin-right: 30%;
 }
 
-#contact_transaction_title_div {
+#payment_title_div {
 
 	height : 48px;
 
@@ -190,7 +200,7 @@ section {
 	align-items: center;
 }
 
-.contact_transaction_title {
+.payment_title {
 
 	height : 40px;
 
@@ -199,110 +209,141 @@ section {
  	font-weight: normal;
 }
 
-#contact_transaction_background_div {
+#payment_background_div {
 
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+
+	background-color: rgb(245,245,245);
+	border-radius: 8px;
+}
+
+#payment_message_div {
+
+	margin-top: 16px;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+.payment_message_label {
+
+	width: 100%;
+	height: 20px;
+
+	color: red;
+    line-height: 20px; 
+   	text-align: center;
+    font-size: 1em;
+}
+
+#payment_form {
+	
+	width: 90%;
+	
+	margin-top: 16px;
+	margin-bottom: 16px;
+	
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 }
 
-#contact_transaction_table {
-
-	width : 100%;
-
-	border: 1px solid black;
-   	border-color: rgb(200,200,200);
-  	border-collapse: collapse;
-}
-
-#contact_transaction_table th {
+#payment_field_div {
 	
-	height: 40px;
+	width: 100%;
+	height: 200px;
 
-  	color: white;
-    font-size: 1.2em;
-    text-align: center; 
- 	font-weight: normal;
- 	background-color: rgb(116,211,106);
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+
 }
 
-#contact_transaction_table tr {
-
-	line-height: 40px;
-    font-size: 1em;
-    text-align: center; 
-}
-
-#contact_transaction_table tr:nth-child(even){
-
-  	background-color: rgb(245,245,245);
-}
-
-#bank_account_transaction_div {
-
-	margin-top: 16px;
-	margin-left: 30%;
-	margin-right: 30%;
-}
-
-#bank_account_transaction_title_div {
-
-	height : 48px;
+#card_number_div {
+	
+	width: 100%;
 
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
+
 }
 
-.bank_account_transaction_title {
-
-	height : 40px;
-
-    font-size: 1.5em;
-    line-height: 40px;
- 	font-weight: normal;
-}
-
-#bank_account_transaction_background_div {
+#card_expiration_div {
+	
+	width: 100%;
 
 	display: flex;
-	flex-direction: column;
-	justify-content: center;
+	flex-direction: row;
+	justify-content: space-between;
 	align-items: center;
+
 }
 
-#bank_account_transaction_table {
-
-	width : 100%;
-
-	border: 1px solid black;
-   	border-color: rgb(200,200,200);
-  	border-collapse: collapse;
-}
-
-#bank_account_transaction_table th {
+#card_cryptogram_div {
 	
+	width: 100%;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+
+}
+
+#payement_amount_div {
+	
+	width: 100%;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+
+}
+
+.payment_label {
+	
+	height : 20px;
+	width: 50%;
+
+	font-size: 1em;
+    line-height: 20px; 
+    text-align: left; 
+}
+
+.payment_input {
+
+	height : 20px;
+	width: 30%;
+
+	font-size: 1em;
+    line-height: 20px; 
+    text-align: center; 
+}
+
+.payment_button {
+
+	width: 20%;
 	height: 40px;
 
-  	color: white;
-    font-size: 1.2em;
-    text-align: center; 
- 	font-weight: normal;
- 	background-color: rgb(116,211,106);
-}
-
-#bank_account_transaction_table tr {
-
-	line-height: 40px;
+	color: white;
     font-size: 1em;
-    text-align: center; 
-}
-
-#bank_account_transaction_table tr:nth-child(even){
-
-  	background-color: rgb(245,245,245);
+	font-weight: bold;
+    line-height: 40px; 
+	text-align: center;
+	text-decoration: none;
+	background-color: rgb(116,211,106);
+	border-radius: 8px;
+	border: none;
 }
 
 footer {
