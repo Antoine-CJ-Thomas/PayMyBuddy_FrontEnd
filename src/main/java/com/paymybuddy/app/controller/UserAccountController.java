@@ -69,8 +69,14 @@ public class UserAccountController {
     }
 	
     @GetMapping(value = {"/", "/login"})
-    public String loginWebPage(Model model) {
+    public String loginWebPage(Model model, String error) {
         logger.info("loginWebPage()");
+                
+        if(error != null) {
+        	
+        	model.addAttribute("login_message", "Invalid email or password");
+        }
+        
         return "/login.html";
     }
 	
