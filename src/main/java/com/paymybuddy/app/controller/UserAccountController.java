@@ -18,8 +18,8 @@ import com.paymybuddy.app.dto.ExternalTransactionRetrievingDto;
 import com.paymybuddy.app.dto.InternalTransactionRetrievingDto;
 import com.paymybuddy.app.dto.UserAccountCreatingDto;
 import com.paymybuddy.app.dto.UserAccountDeletingDto;
+import com.paymybuddy.app.dto.UserAccountBalanceEditingDto;
 import com.paymybuddy.app.dto.UserAccountEditingDto;
-import com.paymybuddy.app.dto.UserAccountPayementDto;
 import com.paymybuddy.app.dto.UserAccountRetrievingDto;
 import com.paymybuddy.app.service.ExternalTransactionService;
 import com.paymybuddy.app.service.InternalTransactionService;
@@ -120,7 +120,7 @@ public class UserAccountController {
     }
 
     @PostMapping(value = "/balance")
-    public String addMoneyToBalance(Model model, RedirectAttributes redirectAttributes,
+    public String editUserAccountBalance(Model model, RedirectAttributes redirectAttributes,
     		@RequestParam(value = "card_number") String cardNumber, 
     		@RequestParam(value = "card_expiration") String cardExpiration, 
     		@RequestParam(value = "card_cryptogram") String cardCryptogram, 
@@ -128,7 +128,7 @@ public class UserAccountController {
         
         String userEmailAddress = SecurityContextHolder.getContext().getAuthentication().getName();
     	
-    	UserAccountPayementDto userAccountPayementDto = userAccountService.addMoneyToBalance(new UserAccountPayementDto(userEmailAddress, cardNumber, cardExpiration, cardCryptogram, payementAmount));
+        UserAccountBalanceEditingDto userAccountPayementDto = userAccountService.editUserAccountBalance(new UserAccountBalanceEditingDto(userEmailAddress, cardNumber, cardExpiration, cardCryptogram, payementAmount));
         
 		if (userAccountPayementDto.isDataValidated() == false) {
 
