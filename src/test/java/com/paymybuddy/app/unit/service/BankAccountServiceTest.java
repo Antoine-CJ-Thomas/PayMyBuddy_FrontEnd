@@ -1,10 +1,9 @@
-package com.paymybuddy.app.service;
+package com.paymybuddy.app.unit.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +14,7 @@ import com.paymybuddy.app.dto.BankAccountAddingDto;
 import com.paymybuddy.app.dto.BankAccountRemovingDto;
 import com.paymybuddy.app.dto.BankAccountRetrievingDto;
 import com.paymybuddy.app.proxy.BankAccountProxy;
+import com.paymybuddy.app.service.BankAccountService;
 
 @SpringBootTest
 class bankAccountServiceTest {

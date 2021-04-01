@@ -1,4 +1,4 @@
-package com.paymybuddy.app.service;
+package com.paymybuddy.app.unit.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -13,6 +13,7 @@ import com.paymybuddy.app.dto.UserContactAddingDto;
 import com.paymybuddy.app.dto.UserContactRemovingDto;
 import com.paymybuddy.app.dto.UserContactRetrievingDto;
 import com.paymybuddy.app.proxy.UserContactProxy;
+import com.paymybuddy.app.service.UserContactService;
 
 @SpringBootTest
 class UserContactServiceTest {

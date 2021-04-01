@@ -1,4 +1,4 @@
-package com.paymybuddy.app.service;
+package com.paymybuddy.app.unit.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -12,6 +12,7 @@ import org.springframework.test.util.ReflectionTestUtils;
 import com.paymybuddy.app.dto.InternalTransactionExecutingDto;
 import com.paymybuddy.app.dto.InternalTransactionRetrievingDto;
 import com.paymybuddy.app.proxy.InternalTransactionProxy;
+import com.paymybuddy.app.service.InternalTransactionService;
 
 @SpringBootTest
 class InternalTransactionServiceTest {

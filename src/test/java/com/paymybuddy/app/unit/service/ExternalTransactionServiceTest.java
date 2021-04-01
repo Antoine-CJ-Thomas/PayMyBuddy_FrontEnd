@@ -1,4 +1,4 @@
-package com.paymybuddy.app.service;
+package com.paymybuddy.app.unit.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -12,6 +12,7 @@ import org.springframework.test.util.ReflectionTestUtils;
 import com.paymybuddy.app.dto.ExternalTransactionExecutingDto;
 import com.paymybuddy.app.dto.ExternalTransactionRetrievingDto;
 import com.paymybuddy.app.proxy.ExternalTransactionProxy;
+import com.paymybuddy.app.service.ExternalTransactionService;
 
 @SpringBootTest
 class ExternalTransactionServiceTest {

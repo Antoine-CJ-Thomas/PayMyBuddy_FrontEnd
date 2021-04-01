@@ -1,10 +1,12 @@
-package com.paymybuddy.app.dto;
+package com.paymybuddy.app.unit.dto;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import com.paymybuddy.app.dto.BankAccountRemovingDto;
 
 @SpringBootTest
 class BankAccountRemovingDtoTest {

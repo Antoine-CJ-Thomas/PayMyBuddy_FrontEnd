@@ -1,4 +1,4 @@
-package com.paymybuddy.app.dto;
+package com.paymybuddy.app.unit.dto;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -6,15 +6,17 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class UserAccountEditingDtoTest {
+import com.paymybuddy.app.dto.UserAccountCreatingDto;
 
-	private UserAccountEditingDto userAccountEditingDto;
+@SpringBootTest
+class UserAccountCreatingDtoTest {
+
+	private UserAccountCreatingDto userAccountCreatingDto;
     
 	@BeforeEach
 	void beforeEach() {
 
-		userAccountEditingDto = new UserAccountEditingDto(null, null, null, null);
+		userAccountCreatingDto = new UserAccountCreatingDto(null, null, null, null);
 	}
 
 	@Test
@@ -24,10 +26,10 @@ class UserAccountEditingDtoTest {
 		String emailAddress = "emailAddress";
         
     	//WHEN
-		userAccountEditingDto.setEmailAddress(emailAddress);
+		userAccountCreatingDto.setEmailAddress(emailAddress);
     	
     	//THEN
-        assertEquals(emailAddress, userAccountEditingDto.getEmailAddress());
+        assertEquals(emailAddress, userAccountCreatingDto.getEmailAddress());
 	}
 
 	@Test
@@ -37,10 +39,10 @@ class UserAccountEditingDtoTest {
 		String password = "password";
         
     	//WHEN
-		userAccountEditingDto.setPassword(password);
+		userAccountCreatingDto.setPassword(password);
     	
     	//THEN
-        assertEquals(password, userAccountEditingDto.getPassword());
+        assertEquals(password, userAccountCreatingDto.getPassword());
 	}
 
 	@Test
@@ -50,10 +52,10 @@ class UserAccountEditingDtoTest {
 		String firstName = "firstName";
         
     	//WHEN
-		userAccountEditingDto.setFirstName(firstName);
+		userAccountCreatingDto.setFirstName(firstName);
     	
     	//THEN
-        assertEquals(firstName, userAccountEditingDto.getFirstName());
+        assertEquals(firstName, userAccountCreatingDto.getFirstName());
 	}
 
 	@Test
@@ -63,10 +65,10 @@ class UserAccountEditingDtoTest {
 		String lastName = "lastName";
         
     	//WHEN
-		userAccountEditingDto.setLastName(lastName);
+		userAccountCreatingDto.setLastName(lastName);
     	
     	//THEN
-        assertEquals(lastName, userAccountEditingDto.getLastName());
+        assertEquals(lastName, userAccountCreatingDto.getLastName());
 	}
 
 	@Test
@@ -76,10 +78,10 @@ class UserAccountEditingDtoTest {
 		boolean dataValidated = true;
         
     	//WHEN
-		userAccountEditingDto.setDataValidated(dataValidated);
+		userAccountCreatingDto.setDataValidated(dataValidated);
     	
     	//THEN
-        assertEquals(dataValidated, userAccountEditingDto.isDataValidated());
+        assertEquals(dataValidated, userAccountCreatingDto.isDataValidated());
 	}
 
 	@Test
@@ -89,9 +91,9 @@ class UserAccountEditingDtoTest {
 		String message = "message";
         
     	//WHEN
-		userAccountEditingDto.setMessage(message);
+		userAccountCreatingDto.setMessage(message);
     	
     	//THEN
-        assertEquals(message, userAccountEditingDto.getMessage());
+        assertEquals(message, userAccountCreatingDto.getMessage());
 	}
 }

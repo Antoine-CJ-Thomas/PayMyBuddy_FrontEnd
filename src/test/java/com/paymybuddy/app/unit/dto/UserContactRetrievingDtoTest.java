@@ -1,4 +1,4 @@
-package com.paymybuddy.app.dto;
+package com.paymybuddy.app.unit.dto;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.paymybuddy.app.dto.UserContactRetrievingDto;
 import com.paymybuddy.app.model.UserContact;
 
 @SpringBootTest

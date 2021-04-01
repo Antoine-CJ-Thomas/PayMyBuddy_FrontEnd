@@ -1,4 +1,4 @@
-package com.paymybuddy.app.controller;
+package com.paymybuddy.app.unit.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
