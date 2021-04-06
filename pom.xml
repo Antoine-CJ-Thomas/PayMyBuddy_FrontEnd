@@ -47,6 +47,13 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!--SPRING SECURITY TEST -->
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-test</artifactId>
+		    <scope>test</scope>
+		</dependency>
+
 		<!--SPRING CLOUD -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
