@@ -39,10 +39,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
 	                .loginProcessingUrl("/login")
 	                .defaultSuccessUrl("/home", true)
+	                
+		        .and()
+		        .rememberMe()
+		        .key("uniqueAndSecret")
+		        .tokenValiditySeconds(86400)
                 
                 .and()
                 .logout()
 	                .logoutUrl("/logout")
+	                .deleteCookies("JSESSIONID")
 	                .logoutSuccessUrl("/login")
 	                .invalidateHttpSession(true)
                 
