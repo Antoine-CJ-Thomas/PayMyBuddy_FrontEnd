@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RequestBody;import org.springfram
 import com.paymybuddy.app.dto.ExternalTransactionExecutingDto;
 import com.paymybuddy.app.dto.ExternalTransactionRetrievingDto;
 
+/**
+ * This class allows to send queries to a ExternalTransactionController on an another server
+ */
 @FeignClient(name = "app-backend", url = "localhost:8080/transaction")
 public interface ExternalTransactionProxy {
 

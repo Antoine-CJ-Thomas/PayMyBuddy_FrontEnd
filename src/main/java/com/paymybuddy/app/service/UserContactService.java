@@ -11,7 +11,7 @@ import com.paymybuddy.app.dto.UserContactRetrievingDto;
 import com.paymybuddy.app.proxy.UserContactProxy;
 
 /**
- *
+ * This class allows to interact with a UserContactProxy
  */
 @Service
 public class UserContactService {

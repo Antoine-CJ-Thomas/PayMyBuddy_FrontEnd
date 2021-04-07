@@ -16,6 +16,9 @@ import com.paymybuddy.app.dto.UserContactRemovingDto;
 import com.paymybuddy.app.dto.UserContactRetrievingDto;
 import com.paymybuddy.app.service.UserContactService;
 
+/**
+ * This class allows to intercept user contact requests
+ */
 @Controller
 public class UserContactController {
 

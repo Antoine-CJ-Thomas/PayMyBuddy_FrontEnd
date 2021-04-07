@@ -25,6 +25,9 @@ import com.paymybuddy.app.service.ExternalTransactionService;
 import com.paymybuddy.app.service.InternalTransactionService;
 import com.paymybuddy.app.service.UserAccountService;
 
+/**
+ * This class allows to intercept user account requests
+ */
 @Controller
 public class UserAccountController {
 

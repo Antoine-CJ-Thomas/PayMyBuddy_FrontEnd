@@ -7,6 +7,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+/**
+ * This class stores the data of an user account
+ */
 @Component
 @SuppressWarnings("serial")
 public class UserAccount implements Serializable, UserDetails {

@@ -17,6 +17,9 @@ import com.paymybuddy.app.dto.ExternalTransactionRetrievingDto;
 import com.paymybuddy.app.service.BankAccountService;
 import com.paymybuddy.app.service.ExternalTransactionService;
 
+/**
+ * This class allows to intercept external transaction requests
+ */
 @Controller
 public class ExternalTransactionController {
 

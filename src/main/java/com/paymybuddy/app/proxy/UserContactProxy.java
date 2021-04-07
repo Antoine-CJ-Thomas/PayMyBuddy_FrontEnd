@@ -10,6 +10,9 @@ import com.paymybuddy.app.dto.UserContactAddingDto;
 import com.paymybuddy.app.dto.UserContactRemovingDto;
 import com.paymybuddy.app.dto.UserContactRetrievingDto;
 
+/**
+ * This class allows to send queries to a UserContactController on an another server
+ */
 @FeignClient(name = "app-backend", url = "localhost:8080/user")
 public interface UserContactProxy {
 

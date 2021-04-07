@@ -13,6 +13,9 @@ import com.paymybuddy.app.dto.UserAccountBalanceEditingDto;
 import com.paymybuddy.app.dto.UserAccountEditingDto;
 import com.paymybuddy.app.dto.UserAccountRetrievingDto;
 
+/**
+ * This class allows to send queries to a UserAccountController on an another server
+ */
 @FeignClient(name = "app-backend", url = "localhost:8080/user")
 public interface UserAccountProxy {
 
