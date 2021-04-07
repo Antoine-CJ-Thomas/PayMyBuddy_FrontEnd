@@ -20,6 +20,8 @@ import com.paymybuddy.app.service.UserContactService;
 public class UserContactController {
 
     private static final Logger logger = LogManager.getLogger("UserContactController");
+    
+    private String userEmailAddress;
 
     @Autowired
 	private UserContactService userContactService;
@@ -33,7 +35,10 @@ public class UserContactController {
     public String retrieveUserContactList(Model model) {
         logger.info("retrieveUserContactList()");
         
-        String userEmailAddress = SecurityContextHolder.getContext().getAuthentication().getName();
+        if (SecurityContextHolder.getContext().getAuthentication() != null) {
+
+        	userEmailAddress = SecurityContextHolder.getContext().getAuthentication().getName();
+        }
     	
         UserContactRetrievingDto userContactRetrievingDto = userContactService.retrieveUserContactList(new UserContactRetrievingDto(userEmailAddress));
 
@@ -48,9 +53,11 @@ public class UserContactController {
     	
         logger.info("addUserContact()");     
         
-        String userEmailAddress = SecurityContextHolder.getContext().getAuthentication().getName();   
+        if (SecurityContextHolder.getContext().getAuthentication() != null) {
 
-       
+        	userEmailAddress = SecurityContextHolder.getContext().getAuthentication().getName();
+        } 
+
         UserContactAddingDto userContactAddingDto = userContactService.addUserContact(new UserContactAddingDto(userEmailAddress, contactEmailAddress));
         
 		if (userContactAddingDto.isDataValidated() == false) {
@@ -67,7 +74,10 @@ public class UserContactController {
     	
         logger.info("removeUserContact()");  
         
-        String userEmailAddress = SecurityContextHolder.getContext().getAuthentication().getName();          
+        if (SecurityContextHolder.getContext().getAuthentication() != null) {
+
+        	userEmailAddress = SecurityContextHolder.getContext().getAuthentication().getName();
+        }        
        
         UserContactRemovingDto userContactRemovingDto = userContactService.removeUserContact(new UserContactRemovingDto(userEmailAddress, contactEmailAddress));
         

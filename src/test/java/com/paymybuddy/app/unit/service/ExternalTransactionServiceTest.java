@@ -31,7 +31,7 @@ class ExternalTransactionServiceTest {
 
 		//GIVEN
 		externalTransactionService = new ExternalTransactionService();
-		ReflectionTestUtils.setField(externalTransactionService, "ExternalTransactionProxy", externalTransactionProxy);
+		ReflectionTestUtils.setField(externalTransactionService, "externalTransactionProxy", externalTransactionProxy);
 	}
 	
 	@Test

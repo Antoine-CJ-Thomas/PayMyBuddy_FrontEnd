@@ -20,6 +20,8 @@ import com.paymybuddy.app.service.BankAccountService;
 public class BankAccountController {
 
     private static final Logger logger = LogManager.getLogger("BankAccountController");
+    
+    private String userEmailAddress;
 
     @Autowired
 	private BankAccountService bankAccountService;
@@ -33,7 +35,10 @@ public class BankAccountController {
     public String retrieveBankAccountList(Model model) {
         logger.info("retrieveBankAccountList()");
         
-        String userEmailAddress = SecurityContextHolder.getContext().getAuthentication().getName();
+        if (SecurityContextHolder.getContext().getAuthentication() != null) {
+
+        	userEmailAddress = SecurityContextHolder.getContext().getAuthentication().getName();
+        }
     	
         BankAccountRetrievingDto BankAccountRetrievingDto = bankAccountService.retrieveBankAccountList(new BankAccountRetrievingDto(userEmailAddress));
 
@@ -50,7 +55,10 @@ public class BankAccountController {
     	
         logger.info("addBankAccount()");        
         
-        String userEmailAddress = SecurityContextHolder.getContext().getAuthentication().getName();
+        if (SecurityContextHolder.getContext().getAuthentication() != null) {
+
+        	userEmailAddress = SecurityContextHolder.getContext().getAuthentication().getName();
+        }
         	
         BankAccountAddingDto BankAccountAddingDto = bankAccountService.addBankAccount(new BankAccountAddingDto(userEmailAddress, accountName, accountNumber, swiftCode));
         
@@ -68,7 +76,10 @@ public class BankAccountController {
     	
         logger.info("removeBankAccount()");
         
-        String userEmailAddress = SecurityContextHolder.getContext().getAuthentication().getName();
+        if (SecurityContextHolder.getContext().getAuthentication() != null) {
+
+        	userEmailAddress = SecurityContextHolder.getContext().getAuthentication().getName();
+        }
    	
         BankAccountRemovingDto BankAccountRemovingDto = bankAccountService.removeBankAccount(new BankAccountRemovingDto(userEmailAddress, accountName));
         

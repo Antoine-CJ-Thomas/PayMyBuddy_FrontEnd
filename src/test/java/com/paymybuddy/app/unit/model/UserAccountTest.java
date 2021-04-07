@@ -83,4 +83,52 @@ class UserAccountTest {
     	//THEN
         assertEquals(balanceAmount, userAccount.getBalanceAmount());
 	}
+
+	@Test
+	void test_getAuthorities() {
+    	
+    	//THEN
+        assertEquals(null, userAccount.getAuthorities());
+	}
+
+	@Test
+	void test_getUsername() {
+
+    	//GIVEN
+		String emailAddress = "emailAdress";
+        
+    	//WHEN
+		userAccount.setEmailAddress(emailAddress);
+    	
+    	//THEN
+        assertEquals(emailAddress, userAccount.getUsername());
+	}
+
+	@Test
+	void test_isAccountNonExpired() {
+    	
+    	//THEN
+        assertEquals(true, userAccount.isAccountNonExpired());
+	}
+
+	@Test
+	void test_isAccountNonLocked() {
+    	
+    	//THEN
+        assertEquals(true, userAccount.isAccountNonLocked());
+	}
+
+	@Test
+	void test_isCredentialsNonExpired() {
+    	
+    	//THEN
+        assertEquals(true, userAccount.isCredentialsNonExpired());
+	}
+
+	@Test
+	void test_isEnabled() {
+    	
+    	//THEN
+        assertEquals(true, userAccount.isEnabled());
+	}
 }

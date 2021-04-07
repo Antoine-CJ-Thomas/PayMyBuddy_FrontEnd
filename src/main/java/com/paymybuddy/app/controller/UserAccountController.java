@@ -31,6 +31,7 @@ public class UserAccountController {
     private static final Logger logger = LogManager.getLogger("UserAccountController");
 
     private String pageName;
+    private String userEmailAddress;
     
     @Autowired
 	private UserAccountService userAccountService;
@@ -38,8 +39,8 @@ public class UserAccountController {
 	private InternalTransactionService internalTransactionService;
     @Autowired
 	private ExternalTransactionService externalTransactionService;
-	
-	
+    
+    
 	public UserAccountController() {
         logger.info("UserAccountController()");
 	}
@@ -93,7 +94,10 @@ public class UserAccountController {
     public String homeWebPage(Model model) {
         logger.info("homeWebPage()");
         
-        String userEmailAddress = SecurityContextHolder.getContext().getAuthentication().getName();
+        if (SecurityContextHolder.getContext().getAuthentication() != null) {
+
+        	userEmailAddress = SecurityContextHolder.getContext().getAuthentication().getName();
+        }
                 
     	UserAccountRetrievingDto userAccountRetrievingDto = userAccountService.retrieveUserAccount(new UserAccountRetrievingDto(userEmailAddress));
         model.addAttribute("balance", userAccountRetrievingDto.getUserAccount().getBalanceAmount());
@@ -111,7 +115,10 @@ public class UserAccountController {
     public String balanceWebPage(Model model) {
         logger.info("balanceWebPage()");          
         
-        String userEmailAddress = SecurityContextHolder.getContext().getAuthentication().getName();
+        if (SecurityContextHolder.getContext().getAuthentication() != null) {
+
+        	userEmailAddress = SecurityContextHolder.getContext().getAuthentication().getName();
+        }
                 
     	UserAccountRetrievingDto userAccountRetrievingDto = userAccountService.retrieveUserAccount(new UserAccountRetrievingDto(userEmailAddress));
         model.addAttribute("balance", userAccountRetrievingDto.getUserAccount().getBalanceAmount());
@@ -125,14 +132,19 @@ public class UserAccountController {
     		@RequestParam(value = "card_expiration") String cardExpiration, 
     		@RequestParam(value = "card_cryptogram") String cardCryptogram, 
     		@RequestParam(value = "payement_amount") float payementAmount) {
-        
-        String userEmailAddress = SecurityContextHolder.getContext().getAuthentication().getName();
     	
-        UserAccountBalanceEditingDto userAccountPayementDto = userAccountService.editUserAccountBalance(new UserAccountBalanceEditingDto(userEmailAddress, cardNumber, cardExpiration, cardCryptogram, payementAmount));
+        logger.info("editUserAccountBalance()");
         
-		if (userAccountPayementDto.isDataValidated() == false) {
+        if (SecurityContextHolder.getContext().getAuthentication() != null) {
 
-			redirectAttributes.addFlashAttribute("payement_message", userAccountPayementDto.getMessage());
+        	userEmailAddress = SecurityContextHolder.getContext().getAuthentication().getName();
+        }
+    	
+        UserAccountBalanceEditingDto userAccountBalanceEditingDto = userAccountService.editUserAccountBalance(new UserAccountBalanceEditingDto(userEmailAddress, cardNumber, cardExpiration, cardCryptogram, payementAmount));
+        
+		if (userAccountBalanceEditingDto.isDataValidated() == false) {
+
+			redirectAttributes.addFlashAttribute("payement_message", userAccountBalanceEditingDto.getMessage());
 		}
     	
 		return ("redirect:/balance");
@@ -142,7 +154,10 @@ public class UserAccountController {
     public String profileWebPage(Model model) {
         logger.info("profileWebPage()");
         
-        String userEmailAddress = SecurityContextHolder.getContext().getAuthentication().getName();
+        if (SecurityContextHolder.getContext().getAuthentication() != null) {
+
+        	userEmailAddress = SecurityContextHolder.getContext().getAuthentication().getName();
+        }
     	
         UserAccountRetrievingDto userAccountRetrievingDto = userAccountService.retrieveUserAccount(new UserAccountRetrievingDto(userEmailAddress));
 
@@ -161,7 +176,10 @@ public class UserAccountController {
 		
         logger.info("editUserAccount()");        
         
-        String userEmailAddress = SecurityContextHolder.getContext().getAuthentication().getName();
+        if (SecurityContextHolder.getContext().getAuthentication() != null) {
+
+        	userEmailAddress = SecurityContextHolder.getContext().getAuthentication().getName();
+        }
         
         String cryptedPassword = BCrypt.hashpw(password, BCrypt.gensalt(12));
    	
@@ -187,7 +205,10 @@ public class UserAccountController {
     	
         logger.info("deleteUserAccount()");        
         
-        String userEmailAddress = SecurityContextHolder.getContext().getAuthentication().getName();
+        if (SecurityContextHolder.getContext().getAuthentication() != null) {
+
+        	userEmailAddress = SecurityContextHolder.getContext().getAuthentication().getName();
+        }
    	
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();   
         

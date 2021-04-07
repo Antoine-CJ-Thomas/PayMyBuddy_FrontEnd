@@ -9,6 +9,7 @@ import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.util.ReflectionTestUtils;
 
+import com.paymybuddy.app.dto.UserAccountBalanceEditingDto;
 import com.paymybuddy.app.dto.UserAccountCreatingDto;
 import com.paymybuddy.app.dto.UserAccountDeletingDto;
 import com.paymybuddy.app.dto.UserAccountEditingDto;
@@ -27,6 +28,8 @@ class UserAccountServiceTest {
 	private UserAccountDeletingDto userAccountDeletingDto;
 	@Mock
 	private UserAccountEditingDto userAccountEditingDto;
+	@Mock
+	private UserAccountBalanceEditingDto userAccountBalanceEditingDto;
 	@Mock
 	private UserAccountRetrievingDto userAccountRetrievingDto;
 	@Mock
@@ -71,6 +74,16 @@ class UserAccountServiceTest {
 	}
 
 	@Test
+	void test_editUserAccountBalance() {
+        
+    	//WHEN		
+		when(userAccountProxy.editUserAccountBalance(userAccountBalanceEditingDto)).thenReturn(userAccountBalanceEditingDto);
+		
+    	//THEN
+        assertEquals(userAccountBalanceEditingDto, userAccountService.editUserAccountBalance(userAccountBalanceEditingDto));
+	}
+
+	@Test
 	void test_retrieveUserAccount() {
         
     	//WHEN		
@@ -79,5 +92,16 @@ class UserAccountServiceTest {
 		
     	//THEN
         assertEquals(userAccountRetrievingDto, userAccountService.retrieveUserAccount(userAccountRetrievingDto));
+	}
+
+	@Test
+	void test_loadUserByUsername() {
+        
+    	//WHEN		
+		when(userAccountRetrievingDto.getEmailAddress()).thenReturn("emailAddress");
+		when(userAccountProxy.retrieveUserAccount(userAccountRetrievingDto.getEmailAddress())).thenReturn(userAccountRetrievingDto);
+		
+    	//THEN
+        assertEquals(userAccountRetrievingDto.getUserAccount(), userAccountService.loadUserByUsername(userAccountRetrievingDto.getEmailAddress()));
 	}
 }

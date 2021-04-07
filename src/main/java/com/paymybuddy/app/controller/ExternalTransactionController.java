@@ -21,6 +21,8 @@ import com.paymybuddy.app.service.ExternalTransactionService;
 public class ExternalTransactionController {
 
     private static final Logger logger = LogManager.getLogger("ExternalTransactionController");
+    
+    private String userEmailAddress;
 
     @Autowired
 	private ExternalTransactionService externalTransactionService;
@@ -36,7 +38,10 @@ public class ExternalTransactionController {
     public String retrieveExternalTransactionList(Model model) {
         logger.info("retrieveExternalTransactionList()");
         
-        String userEmailAddress = SecurityContextHolder.getContext().getAuthentication().getName();
+        if (SecurityContextHolder.getContext().getAuthentication() != null) {
+
+        	userEmailAddress = SecurityContextHolder.getContext().getAuthentication().getName();
+        }
     	
         ExternalTransactionRetrievingDto externalTransactionRetrievingDto = externalTransactionService.retrieveExternalTransactionList(new ExternalTransactionRetrievingDto(userEmailAddress));
 
@@ -46,7 +51,7 @@ public class ExternalTransactionController {
 
         model.addAttribute("bank_account_list", BankAccountRetrievingDto.getBankAccountList());
         
-        return "bank_transaction.html";
+        return "/bank_transaction.html";
     }
 	
     @PostMapping(value = "/bank/transaction")
@@ -57,7 +62,10 @@ public class ExternalTransactionController {
     	
         logger.info("executeExternalTransaction()");
         
-        String userEmailAddress = SecurityContextHolder.getContext().getAuthentication().getName();
+        if (SecurityContextHolder.getContext().getAuthentication() != null) {
+
+        	userEmailAddress = SecurityContextHolder.getContext().getAuthentication().getName();
+        }
         	
         ExternalTransactionExecutingDto externalTransactionExecutingDto = externalTransactionService.executeExternalTransaction(new ExternalTransactionExecutingDto(userEmailAddress, accountName, description, amount));
         

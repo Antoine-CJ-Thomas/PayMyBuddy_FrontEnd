@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 @Component
+@SuppressWarnings("serial")
 public class UserAccount implements Serializable, UserDetails {
 
 	private String emailAddress;
