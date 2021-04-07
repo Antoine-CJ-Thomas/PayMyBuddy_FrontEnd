@@ -10,7 +10,7 @@ import com.paymybuddy.app.dto.InternalTransactionRetrievingDto;
 import com.paymybuddy.app.proxy.InternalTransactionProxy;
 
 /**
- *
+ * This class allows to interact with a InternalTransactionProxy
  */
 @Service
 public class InternalTransactionService {

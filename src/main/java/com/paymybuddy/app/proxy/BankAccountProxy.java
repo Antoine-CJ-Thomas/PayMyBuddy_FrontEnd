@@ -10,6 +10,9 @@ import com.paymybuddy.app.dto.BankAccountAddingDto;
 import com.paymybuddy.app.dto.BankAccountRemovingDto;
 import com.paymybuddy.app.dto.BankAccountRetrievingDto;
 
+/**
+ * This class allows to send queries to a BankAccountController on an another server
+ */
 @FeignClient(name = "app-backend", url = "localhost:8080/bank")
 public interface BankAccountProxy {
 

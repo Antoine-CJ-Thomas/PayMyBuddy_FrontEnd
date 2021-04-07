@@ -11,7 +11,7 @@ import com.paymybuddy.app.dto.BankAccountRetrievingDto;
 import com.paymybuddy.app.proxy.BankAccountProxy;
 
 /**
- *
+ * This class allows to interact with a BankAccountProxy
  */
 @Service
 public class BankAccountService {

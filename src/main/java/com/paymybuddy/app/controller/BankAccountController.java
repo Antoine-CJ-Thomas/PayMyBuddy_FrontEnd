@@ -16,6 +16,9 @@ import com.paymybuddy.app.dto.BankAccountRemovingDto;
 import com.paymybuddy.app.dto.BankAccountRetrievingDto;
 import com.paymybuddy.app.service.BankAccountService;
 
+/**
+ * This class allows to intercept bank account requests
+ */
 @Controller
 public class BankAccountController {
 

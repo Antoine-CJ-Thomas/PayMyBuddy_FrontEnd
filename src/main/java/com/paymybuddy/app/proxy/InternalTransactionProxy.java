@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RequestBody;import org.springfram
 import com.paymybuddy.app.dto.InternalTransactionExecutingDto;
 import com.paymybuddy.app.dto.InternalTransactionRetrievingDto;
 
+/**
+ * This class allows to send queries to a InternalTransactionController on an another server
+ */
 @FeignClient(name = "app-backend", url = "localhost:8080/transaction")
 public interface InternalTransactionProxy {
 

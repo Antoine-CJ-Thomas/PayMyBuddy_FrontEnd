@@ -17,6 +17,9 @@ import com.paymybuddy.app.dto.UserContactRetrievingDto;
 import com.paymybuddy.app.service.InternalTransactionService;
 import com.paymybuddy.app.service.UserContactService;
 
+/**
+ * This class allows to intercept internal transaction requests
+ */
 @Controller
 public class InternalTransactionController {
 

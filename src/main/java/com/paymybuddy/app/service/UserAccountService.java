@@ -16,7 +16,7 @@ import com.paymybuddy.app.dto.UserAccountRetrievingDto;
 import com.paymybuddy.app.proxy.UserAccountProxy;
 
 /**
- *
+ * This class allows to interact with a UserAccountProxy
  */
 @Service
 public class UserAccountService implements UserDetailsService {
