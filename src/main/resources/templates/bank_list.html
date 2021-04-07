@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="/css/bank_list.css" />
+        <title>Pay My Buddy - bank account list</title>
+
+    </head>
+
+    <body>
+
+    	<header>
+    
+    		<div id="header_div">
+
+    			<div id="logo_div">
+
+  					<label for="pay_my_buddy">Pay My Buddy</label>
+
+	    		</div>
+
+    			<div id="button_div">
+
+	   					<a class="menu_button" href="/home">Home</a>
+	   					<a class="menu_button" href="/bank">Bank</a>
+	   					<a class="menu_button" href="/contact">Contact</a>
+	   					<a class="menu_button" href="/profile">Profile</a>
+	   					<a class="menu_button" href="/logout">log out</a>
+
+	    		</div>
+
+	    	</div>
+
+    		<div id="naviguation_div">
+
+    			<div id="path_div">
+
+   					<a class="path_button" href="/home">Home /</a>
+  					<label class="path_label" for="bank_account">Bank /</label>
+
+    			</div>
+
+    		</div>
+
+    	</header>
+
+    	<section>
+
+    		<div id="bank_account_adding_div">
+
+	    		<div id="bank_account_adding_title_div">
+
+    				<h1 class="bank_account_adding_title">Add Bank Account</h1>
+
+	    		</div>
+
+	    		<div id="bank_account_adding_background_div">
+				
+					<div id="adding_message_div" th:if="${adding_message != null}">
+					
+	  					<label class="adding_message_label" th:text="${adding_message}"></label>
+					
+					</div>
+
+		    		<form id="bank_account_adding_form" method="post" th:action="@{/bank/add}">
+
+			    		<div id="bank_account_adding_field_div">
+		
+							<input type="text" class="adding_input" name="account_name" placeholder="Account name" required>
+							<input type="text" class="adding_input" name="account_number" placeholder="Account number" required>
+							<input type="text" class="adding_input" name="swift_code" placeholder="Swift code" required>
+		   					<button type="submit" class="adding_button" >Add</button>
+		
+			    		</div>
+ 	
+					</form>
+		    		
+	    		</div>
+
+    		</div>
+
+    		<div id="bank_account_removing_div">
+
+	    		<div id="bank_account_removing_title_div">
+
+    				<h1 class="bank_account_removing_title">Remove Bank Account</h1>
+
+	    		</div>
+
+	    		<div id="bank_account_removing_background_div">
+				
+					<div id="removing_message_div" th:if="${removing_message != null}">
+					
+	  					<label class="removing_message_label" th:text="${removing_message}"></label>
+					
+					</div>
+
+		    		<form id="bank_account_removing_form" method="post" th:action="@{/bank/remove}">
+
+			    		<div id="bank_account_removing_field_div">
+			    		
+				    		<select class="removing_select" name="account_name" required>
+				    		
+				    			<option disabled selected value="">Select an account</option>
+							    <option th:each="bank_account : ${bank_account_list}" th:value="${bank_account.accountName}" th:text="${bank_account.accountName}"></option>
+							    
+							</select>
+		
+		   					<button type="submit" class="removing_button" >Remove</button>
+		
+			    		</div>
+ 	
+					</form>
+		    		
+	    		</div>
+
+    		</div>
+
+    		<div id="bank_account_list_div">
+
+	    		<div id="bank_account_list_title_div">
+
+	    			<h1 class="bank_account_list_title">My Bank Accounts</h1>
+					<a class="bank_account_list_title_button" href="/bank/transaction">Send Money</a>
+
+	    		</div>
+
+	    		<div id="bank_account_list_background_div">
+	
+					<table id="bank_account_list_table">
+
+						<tr>
+						
+							<th>Name</th>
+							<th>Account number</th>
+							<th>Swift code</th>
+							
+						</tr>
+
+						<tr th:each="bank_account: ${bank_account_list}">
+						
+						    <td th:text="${bank_account.accountName}" />
+						    <td th:text="${bank_account.accountNumber}" />
+						    <td th:text="${bank_account.swiftCode}" />
+						    
+						</tr>
+
+					</table>
+					
+	    		</div>
+
+    		</div>
+
+    	</section>
+
+		<footer>
+
+		</footer>
+
+    </body>
+
+</html>

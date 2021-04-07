@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="/css/profile.css" />
+        <title>Pay My Buddy - profile</title>
+
+    </head>
+
+    <body>
+
+    	<header>
+
+    		<div id="header_div">
+
+    			<div id="logo_div">
+
+  					<label for="pay_my_buddy">Pay My Buddy</label>
+
+	    		</div>
+
+    			<div id="button_div">
+
+	   					<a class="menu_button" href="/home">Home</a>
+	   					<a class="menu_button" href="/bank">Bank</a>
+	   					<a class="menu_button" href="/contact">Contact</a>
+	   					<a class="menu_button" href="/profile">Profile</a>
+	   					<a class="menu_button" href="/logout">log out</a>
+
+	    		</div>
+
+	    	</div>
+
+    		<div id="naviguation_div">
+
+    			<div id="path_div">
+
+   					<a class="path_button" href="/home">Home /</a>
+  					<label class="path_label" for="profile">Profile /</label>
+
+    			</div>
+
+    		</div>
+
+    	</header>
+
+    	<section>
+
+    		<div id="section_div">
+
+	    		<div id="information_div">
+	
+		    		<div id="information_title_div">
+	
+	    				<h1 class="information_title"> My informations</h1>
+	
+		    		</div>
+	
+		    		<div id="information_background_div">
+	
+	    				<div id="information_group_div">
+
+	    					<div class="information_field_div">
+	    					
+					    		<label class="information_label" for="email_address">Email address :</label>
+								<label class="information_label" th:text="${email_address}"></label>
+	
+			    			</div>
+
+	    					<div class="information_field_div">
+	    					
+		    					<label class="information_label" for="first_name">First name :</label>
+		    					<label class="information_label" th:text="${first_name}"></label>
+	
+			    			</div>
+
+	    					<div class="information_field_div">
+	    					
+		    					<label class="information_label" for="last_name">Last name :</label>
+		    					<label class="information_label" th:text="${last_name}"></label>
+	
+			    			</div>
+		
+			    		</div>
+	
+		    		</div>
+	
+	    		</div>
+	
+	    		<div id="edition_div">
+	
+		    		<div id="edition_title_div">
+	
+	    				<h1 class="edition_title">Edit account</h1>
+	
+		    		</div>
+	
+		    		<div id="edition_background_div">
+				
+						<div id="edition_message_div" th:if="${edition_message != null}">
+						
+		  					<label class="edition_message_label" th:text="${edition_message}"></label>
+						
+						</div>
+
+			    		<form id="edition_form" method="post" th:action="@{/account/edit}">
+
+	    					<div class="edition_field_div">
+				    		
+					    		<label class="edition_label" for="first_name">New first name :</label>
+					    		<input class="edition_input" type="text" name="first_name" th:value="${first_name}" required/>
+	
+			    			</div>
+
+	    					<div class="edition_field_div">
+					    		
+					    		<label class="edition_label" for="last_name">New last name :</label>
+					    		<input class="edition_input" type="text" name="last_name" th:value="${last_name}" required/>
+	
+			    			</div>
+
+	    					<div class="edition_field_div">
+					    		
+					    		<label class="edition_label" for="password">New password :</label>
+					    		<input class="edition_input" type="password" name="password" required/>
+	
+			    			</div>
+								
+				    		<div id="edition_button_div">
+
+			   					<button type="submit" class="save_button" >Save</button>
+			
+				    		</div>
+										
+						</form>
+	
+		    		</div>
+		
+	    		</div>
+	
+	    		<div id="deletion_div">
+	
+		    		<div id="deletion_title_div">
+	
+	    				<h1 class="deletion_title">Delete account</h1>
+	
+		    		</div>
+	
+		    		<div id="deletion_background_div">
+				
+						<div id="deletion_message_div" th:if="${deletion_message != null}">
+						
+		  					<label class="deletion_message_label" th:text="${deletion_message}"></label>
+						
+						</div>
+
+			    		<form id="deletion_form" method="post" th:action="@{/account/delete}">
+
+	    					<div class="deletion_field_div">
+					    		
+					    		<label class="deletion_label" for="password">Password :</label>
+					    		<input class="deletion_input" type="password" name="password" required/>
+	
+			    			</div>
+								
+				    		<div id="deletion_button_div">
+
+			   					<button type="submit" class="delete_button" >Delete</button>
+			
+				    		</div>
+										
+						</form>
+	
+		    		</div>
+		
+	    		</div>
+	
+    		</div>
+
+    	</section>
+
+		<footer>
+
+		</footer>
+
+    </body>
+
+</html>

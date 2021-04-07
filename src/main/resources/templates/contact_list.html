@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="/css/contact_list.css" />
+        <title>Pay My Buddy - contact list</title>
+
+    </head>
+
+    <body>
+
+    	<header>
+    
+    		<div id="header_div">
+
+    			<div id="logo_div">
+
+  					<label for="pay_my_buddy">Pay My Buddy</label>
+
+	    		</div>
+
+    			<div id="button_div">
+
+	   					<a class="menu_button" href="/home">Home</a>
+	   					<a class="menu_button" href="/bank">Bank</a>
+	   					<a class="menu_button" href="/contact">Contact</a>
+	   					<a class="menu_button" href="/profile">Profile</a>
+	   					<a class="menu_button" href="/logout">log out</a>
+
+	    		</div>
+
+	    	</div>
+
+    		<div id="naviguation_div">
+
+    			<div id="path_div">
+
+   					<a class="path_button" href="/home">Home /</a>
+  					<label class="path_label" for="contact">Contact /</label>
+
+    			</div>
+
+    		</div>
+
+    	</header>
+
+    	<section>
+
+    		<div id="contact_adding_div">
+
+	    		<div id="contact_adding_title_div">
+
+    				<h1 class="contact_adding_title">Add Contact</h1>
+
+	    		</div>
+
+	    		<div id="contact_adding_background_div">
+				
+					<div id="adding_message_div" th:if="${adding_message != null}">
+					
+	  					<label class="adding_message_label" th:text="${adding_message}"></label>
+					
+					</div>
+
+		    		<form id="contact_adding_form" method="post" th:action="@{/contact/add}">
+
+			    		<div id="contact_adding_field_div">
+		
+							<input type="text" class="adding_input" name="contact_email_address" placeholder="Email address" required>
+		   					<button type="submit" class="adding_button" >Add</button>
+		
+			    		</div>
+ 	
+					</form>
+		    		
+	    		</div>
+
+    		</div>
+
+    		<div id="contact_removing_div">
+
+	    		<div id="contact_removing_title_div">
+
+    				<h1 class="contact_removing_title">Remove Contact</h1>
+
+	    		</div>
+
+	    		<div id="contact_removing_background_div">
+				
+					<div id="removing_message_div" th:if="${removing_message != null}">
+					
+	  					<label class="removing_message_label" th:text="${removing_message}"></label>
+					
+					</div>
+
+		    		<form id="contact_removing_form" method="post" th:action="@{/contact/remove}">
+
+			    		<div id="contact_removing_field_div">
+			    		
+				    		<select class="removing_select" name="contact_email_address" required>
+				    		
+				    			<option disabled selected value="">Select a contact</option>
+							    <option th:each="contact : ${contact_list}" th:value="${contact.emailAddress}" th:text="${contact.emailAddress}"></option>
+							    
+							</select>
+		
+		   					<button type="submit" class="removing_button" >Remove</button>
+		
+			    		</div>
+ 	
+					</form>
+		    		
+	    		</div>
+
+    		</div>
+
+    		<div id="contact_list_div">
+
+	    		<div id="contact_list_title_div">
+
+	    			<h1 class="contact_list_title">My Contacts</h1>
+					<a class="contact_list_title_button" href="/contact/transaction">Send Money</a>
+
+	    		</div>
+
+	    		<div id="contact_list_background_div">
+	
+					<table id="contact_list_table">
+
+						<tr>
+						
+							<th>Email Address</th>
+							<th>First name</th>
+							<th>Last name</th>
+							
+						</tr>
+
+						<tr th:each="contact: ${contact_list}">
+						
+						    <td th:text="${contact.emailAddress}" />
+						    <td th:text="${contact.firstName}" />
+						    <td th:text="${contact.lastName}" />
+						    
+						</tr>
+
+					</table>
+					
+	    		</div>
+
+    		</div>
+
+    	</section>
+
+		<footer>
+
+		</footer>
+
+    </body>
+
+</html>

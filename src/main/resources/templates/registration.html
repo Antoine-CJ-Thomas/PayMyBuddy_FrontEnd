@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="/css/registration.css" />
+        <title>Pay My Buddy - registration</title>
+
+    </head>
+
+    <body>
+
+    	<header>
+
+	    		<div id="logo_div">
+
+  					<img src="/images/logo.png" alt="Pay My Buddy logo">
+
+	    		</div>
+
+    	</header>
+
+    	<section>
+			
+			<div id="main_div">
+    	
+				<div id="register_div">
+				
+					<div id="register_message_div" th:if="${registration_message != null}">
+					
+	  					<label th:text="${registration_message}"></label>
+					
+					</div>
+	
+			    	<div id="register_form_div">
+			    		
+			    		<form method="post" th:action="@{/registration}">
+	
+				    		<div id="register_form_name_div">
+									
+								<input type="text" name="first_name" maxlength="32" placeholder="First name" required>
+								<input type="text" name="last_name" maxlength="32" placeholder="Last name" required>
+	
+				    		</div>
+	
+				    		<div id="register_form_identifier_div">
+				    		
+			  					<input type="text" name="email_address" maxlength="64" placeholder="Email" required>
+			  					<input type="password" name="password" maxlength="64" placeholder="Password" required>
+			  					
+				    		</div>
+	
+				    		<div id="register_form_button_div">
+				    		
+		    					<button type="submit" class="register_submit_button">Register</button>
+		    					
+				    		</div>
+				    		
+						</form>
+			    	
+					</div>
+	
+	    		</div>
+
+    		</div>
+
+    	</section>
+
+		<footer>
+
+		</footer>
+
+    </body>
+
+</html>

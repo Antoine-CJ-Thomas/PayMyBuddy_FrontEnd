@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="/css/home.css" />
+        <title>Pay My Buddy - home</title>
+
+    </head>
+
+    <body>
+
+    	<header>
+
+    		<div id="header_div">
+
+    			<div id="logo_div">
+
+  					<label for="pay_my_buddy">Pay My Buddy</label><br>
+
+	    		</div>
+
+    			<div id="button_div">
+
+	   					<a class="menu_button" href="/home">Home</a>
+	   					<a class="menu_button" href="/bank">Bank</a>
+	   					<a class="menu_button" href="/contact">Contact</a>
+	   					<a class="menu_button" href="/profile">Profile</a>
+	   					<a class="menu_button" href="/logout">log out</a>
+
+	    		</div>
+
+	    	</div>
+
+    		<div id="naviguation_div">
+
+    			<div id="path_div">
+
+  					<label class="path_label" for="home">Home /</label><br>
+
+    			</div>
+
+    		</div>
+
+    	</header>
+
+    	<section>
+
+    		<div id="section_div">
+
+	    		<div id="balance_div">
+	
+		    		<div id="balance_title_div">
+	
+	    				<h1 class="balance_title">My balance</h1>
+						<a class="balance_title_button" href="/balance">Add Money</a>
+	
+		    		</div>
+	
+		    		<div id="balance_background_div">
+	
+			    		<div id="balance_label_div">
+		
+		  					<label class="balance_label" th:text="${balance} + ' ' + €"></label>
+		
+			    		</div>
+		
+		    		</div>
+	
+	    		</div>
+	
+    		</div>
+
+    		<div id="contact_transaction_div">
+
+	    		<div id="contact_transaction_title_div">
+
+	    			<h1 class="contact_transaction_title">My Last Contacts Transactions</h1>
+
+	    		</div>
+
+	    		<div id="contact_transaction_background_div">
+	
+					<table id="contact_transaction_table">
+
+						<tr>
+						
+							<th>Email Address</th>
+							<th>Date</th>
+							<th>Description</th>
+							<th>Amount</th>
+							
+						</tr>
+						<tr th:each="transaction,iterStat: ${contact_transaction_list}" th:if="${iterStat.index} <3">
+						
+						    <td th:text="${transaction.userContact.emailAddress}" />
+						    <td th:text="${transaction.dateAndTime}" />
+						    <td th:text="${transaction.description}" />
+						    <td th:text="${transaction.amount}" />
+						    
+						</tr>
+
+					</table>
+					
+	    		</div>
+
+    		</div>
+    		
+    		<div id="bank_account_transaction_div">
+
+	    		<div id="bank_account_transaction_title_div">
+
+	    			<h1 class="bank_account_transaction_title">My Last Bank Accounts Transactions</h1>
+
+	    		</div>
+
+	    		<div id="bank_account_transaction_background_div">
+	
+					<table id="bank_account_transaction_table">
+
+						<tr>
+						
+							<th>Account Name</th>
+							<th>Date</th>
+							<th>Description</th>
+							<th>Amount</th>
+							
+						</tr>
+
+						<tr th:each="transaction,iterStat: ${bank_account_transaction_list}" th:if="${iterStat.index} <3">
+						
+						    <td th:text="${transaction.bankAccount.accountName}" />
+						    <td th:text="${transaction.dateAndTime}" />
+						    <td th:text="${transaction.description}" />
+						    <td th:text="${transaction.amount}" />
+						    
+						</tr>
+
+					</table>
+					
+	    		</div>
+
+    		</div>
+
+    	</section>
+
+		<footer>
+
+		</footer>
+
+    </body>
+
+</html>

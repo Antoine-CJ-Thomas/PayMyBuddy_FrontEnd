@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="/css/balance.css" />
+        <title>Pay My Buddy - contact list</title>
+
+    </head>
+
+    <body>
+
+    	<header>
+    
+    		<div id="header_div">
+
+    			<div id="logo_div">
+
+  					<label for="pay_my_buddy">Pay My Buddy</label>
+
+	    		</div>
+
+    			<div id="button_div">
+
+	   					<a class="menu_button" href="/home">Home</a>
+	   					<a class="menu_button" href="/bank">Bank</a>
+	   					<a class="menu_button" href="/contact">Contact</a>
+	   					<a class="menu_button" href="/profile">Profile</a>
+	   					<a class="menu_button" href="/logout">log out</a>
+
+	    		</div>
+
+	    	</div>
+
+    		<div id="naviguation_div">
+
+    			<div id="path_div">
+
+   					<a class="path_button" href="/home">Home /</a>
+  					<label class="path_label" for="contact">Balance /</label>
+
+    			</div>
+
+    		</div>
+
+    	</header>
+
+    	<section>
+
+    		<div id="section_div">
+
+	    		<div id="balance_div">
+	
+		    		<div id="balance_title_div">
+	
+	    				<h1 class="balance_title">My balance</h1>
+	
+		    		</div>
+	
+		    		<div id="balance_background_div">
+	
+			    		<div id="balance_label_div">
+		
+		  					<label class="balance_label" th:text="${balance} + ' ' + €"></label>
+		
+			    		</div>
+		
+		    		</div>
+	
+	    		</div>
+
+	    		<div id="payment_div">
+	
+		    		<div id="payment_title_div">
+	
+	    				<h1 class="payment_title">Add money</h1>
+	
+		    		</div>
+
+		    		<div id="payment_background_div">
+					
+						<div id="payment_message_div" th:if="${payment_message != null}">
+						
+		  					<label class="payment_message_label" th:text="${payment_message}"></label>
+						
+						</div>
+	
+			    		<form id="payment_form" method="post" th:action="@{/balance}">
+	
+				    		<div id="payment_field_div">
+	
+					    		<div id="card_number_div">
+			
+			    					<label class="payment_label" for="card_number">Card Number :</label>
+									<input type="text" class="payment_input" name="card_number" pattern="[ 0-9]{19}" placeholder="XXXX XXXX XXXX XXXX" required>
+				
+					    		</div>
+	
+					    		<div id="card_expiration_div">
+								
+			    					<label class="payment_label" for="card_expiration">Card Expiration :</label>
+									<input type="text" class="payment_input" name="card_expiration" pattern="[/0-9]{5}" placeholder="MM/YY" required>
+				
+					    		</div>
+	
+					    		<div id="card_cryptogram_div">
+				
+			    					<label class="payment_label" for="card_cryptogram">Card Cryptogram :</label>
+									<input type="text" class="payment_input" name="card_cryptogram" pattern="[0-9]{3}" placeholder="XXX" required>
+									
+					    		</div>
+	
+					    		<div id="payement_amount_div">
+				
+			    					<label class="payment_label" for="payement_amount">Payement Amount :</label>
+									<input type="number" class="payment_input" name="payement_amount" min="0.00" placeholder="0.00 €" required>
+									
+					    		</div>
+								
+			   					<button type="submit" class="payment_button" >Validate</button>
+			
+				    		</div>
+	 	
+						</form>
+			    		
+		    		</div>
+		
+	    		</div>
+	
+    		</div>
+
+    	</section>
+
+		<footer>
+
+		</footer>
+
+    </body>
+
+</html>
